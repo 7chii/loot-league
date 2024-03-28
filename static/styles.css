@@ -1,0 +1,62 @@
+*{
+    position:relative;
+    overflow: hidden;
+}
+#leftsInMcseeeNums{
+    float:left;
+    height: 100vh;
+    width:62.3vh;
+    
+    }
+    #indL{
+        box-sizing: border-box;
+        border: 2px dotted white;
+        
+        color:aliceblue;
+        font-size: 500%;
+        float:left;
+        height: 100vh;
+        width: 11vh;
+        background-color: rgb(0, 18, 33);
+    }
+    #mcseeeNnums{
+        float: right;
+        height: 100%;
+        width:51vh;
+    }
+    #mcseee{
+        box-sizing: border-box;
+        /* trocar border por um coisinho de scroll (pra quem for fazer)*/
+        border-right:6px solid;
+        color: aliceblue;
+        border-color: rgb(120, 90, 40);
+        background-color: rgb(0, 18, 33);
+        height: 88vh;
+        padding: 0%;
+        width:51vh;
+    }
+    #nums{
+        box-sizing: border-box;
+        /* trocar border por um coisinho de scroll (pra quem for fazer)*/
+        border-top: 6px solid;
+        border-color: rgb(120, 90, 40);
+        position: relative;
+        bottom: 0;
+        background-color: rgb(0, 18, 33);
+        color: aliceblue;
+        height: 12vh;
+        width: 56vh;
+    }
+
+#rights{
+    box-sizing: border-box;
+        border: 2px dotted white;
+
+    float: right;
+    background-color:rgb(0, 18, 33);
+    height: 100vh;
+    width:138.1vh;
+    h1{
+        color:aliceblue;
+    }
+}
