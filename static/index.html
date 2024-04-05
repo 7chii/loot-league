@@ -30,7 +30,7 @@ X
                     <h3>materiais</h3>
                     <!--BOTAO REFRESH DE ITENS DO INVENTARIO SOLUCAO POR AGORA-->
                     <button id="FORNOW" onclick="funcrefr()">refr</button>
-                    <button id="baus1"></button>
+                    <button id="baus1" onclick="bshow()"></button>
                 </div>
             </div>
             <!-- numeros + botao bau -->
@@ -50,6 +50,9 @@ X
         onde o campeao aparece antes de ir pra esquerda etc etc -->
     <div id="rights">
         <h1>abertura baus etc</h1>
+        <div id="showR">
+            <h1>.</h1>
+        </div>
     </div>
 </div>
 <script>
@@ -63,11 +66,15 @@ X
     inventario[0]=inventario[0]+1;
     document.getElementById("chaves").innerHTML = inventario[0];
     document.getElementById("baus").innerHTML = inventario[0];
+    document.getElementById("baus1").innerHTML = inventario[0];
+    document.getElementById("baus1").style.display = "block";
     }
     function funcrefr(){
         document.getElementById("baus1").innerHTML = inventario[0].toString();
     }
-
+    function bshow(){
+        document.getElementById("showR").style.display = "block";
+    }
 </script>
 </body>
 </html>

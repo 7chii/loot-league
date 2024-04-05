@@ -16,6 +16,12 @@ app.get('/loot-league/static/styles.css',(req, res)=>{
     res.set('content-type', 'text/css');
     res.sendFile(path.join(__dirname, 'static/styles.css'));
 });
+//pedido imagem bau
+app.get('/loot-league/static/imageAs/hextec.png',(req, res)=>
+{
+    res.set('content-type', 'image/png');
+    res.sendFile(path.join(__dirname, 'static/imageAs/hextec.png'));
+})
 
 //listen da porta 8080
 app.listen(port, ()=>{

@@ -35,6 +35,9 @@
         padding: 0%;
         width:51vh;
     }
+    #baus1{
+        display:none;
+    }
     #nums{
         box-sizing: border-box;
         /* trocar border por um coisinho de scroll (pra quem for fazer)*/
@@ -64,4 +67,14 @@
     h1{
         color:aliceblue;
     }
+}
+#showR{
+    background: #FF7A59;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  margin-left: 20%;
+  display: none;
+  align-items: center;
+  text-align: center;
 }
