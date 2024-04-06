@@ -22,9 +22,22 @@
         <div id="mcseeeNnums">
             <!-- materiais etc -->
             <div id="mcseee" class="scrollb">
-                <h1>coisinho de busca<br>_______________</h1>
+                <input type="text" placeholder="Buscar" id="sbme">
+                <div class="drop-orgbutt">
+                    <button class="orgbutt">Alfabetico</button>
+                    <div class="orgbutt-content">
+                        <a href="#" onclick="">Alfabetico</a>
+                        <a href="#" onclick="">Valor</a>
+                        <a href="#" onclick="">Raridade</a>
+                        <a href="#" onclick="">Campeao</a>
+                        <a href="#" onclick="">Ativavel</a>
+                        <a href="#" onclick="">Selecao</a>
+                    </div>
+                </div>
+                
                 <div id="materiais">
                     <h3>materiais</h3>
+                    <hr>
                     <button id="baus1" onclick="bshow()"></button>
                 </div>
             </div>
@@ -44,7 +57,6 @@
     <!-- lado direito dos espolios, onde vai mostrar animacoes de abrir bau, 
         onde o campeao aparece antes de ir pra esquerda etc etc -->
     <div id="rights">
-        <h1>abertura baus etc</h1>
         <div id="showR">
             <button type="button" onclick="baction();banum()" id="acaoSh">acao</button>
         </div>
@@ -69,7 +81,7 @@
     function bshow(){
         document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
         document.getElementById("acaoSh").innerHTML = "ABRIR";
-        document.getElementById("baus1").innerHTML = inventario[0]+"(-1)";
+        document.getElementById("baus1").innerHTML = inventario[0]+"<span class='rtex'>(-1)</span>";
         document.getElementById("showR").style.display = "block";
     }
     //acao abrir bau
@@ -96,6 +108,8 @@
                     var item = rannum(168)+"C";
                     //cria botao do item
                     butt = document.createElement("button");
+                    butt.style.border = "solid rgb(120, 90, 40)";
+                    butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
                     //texto para o botao
@@ -111,6 +125,8 @@
                 //skin
                 var item = rannum(35)+"S";
                     butt = document.createElement("button");
+                    butt.style.border = "solid rgb(120, 90, 40)";
+                    butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
                     text = document.createTextNode(item);
@@ -136,6 +152,8 @@
                     //champ
                     var item = rannum(168)+"C";
                     butt = document.createElement("button");
+                    butt.style.border = "solid rgb(120, 90, 40)";
+                    butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
                     text = document.createTextNode(item);
@@ -148,6 +166,8 @@
                     //skin 
                 var item = rannum(35)+"S";
                     butt = document.createElement("button");
+                    butt.style.border = "solid rgb(120, 90, 40)";
+                    butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
                     text = document.createTextNode(item);
