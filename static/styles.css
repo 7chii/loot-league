@@ -1,19 +1,21 @@
 *{
     position:relative;
-    overflow: hidden;
+    overflow:hidden;
     background-color: rgb(0, 18, 33);
     color:aliceblue;
 }
 #leftsInMcseeeNums{
+    overflow: hidden;
     float:left;
     height: 100vh;
     width:62.3vh;
-    
+    overflow: hidden;
     }
     #indL{
+        overflow: hidden;
         box-sizing: border-box;
-        border: 2px dotted white;
-        
+        display:block;
+        align-content: top;
         color:aliceblue;
         font-size: 500%;
         float:left;
@@ -21,13 +23,22 @@
         width: 11vh;
         background-color: rgb(0, 18, 33);
     }
+    .bin{
+        display: flex;
+        vertical-align: top;
+        margin-top: 30%;
+        padding: 0%;
+        border: hidden;
+    }
     #mcseeeNnums{
+        overflow: hidden;
         float: right;
         height: 100%;
         width:51vh;
     }
     #mcseee{
         box-sizing: border-box;
+        overflow: visible;
         /* trocar border por um coisinho de scroll (pra quem for fazer)*/
         border-right:6px solid;
         color: aliceblue;
@@ -37,7 +48,35 @@
         padding: 0%;
         width:51vh;
     }
+    /*scrollbar*/
+    .scrollb{
+          ::-webkit-scrollbar {
+            width: 13px;
+            height: 13px;
+          }
+          ::-webkit-scrollbar-thumb {
+            background: linear-gradient(13deg, #f9d4ff 14%, #c7ceff 64%);
+            border-radius: 10px;
+          }
+          ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(13deg, #c7ceff 14%, #f9d4ff 64%);
+          }
+          ::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: inset 7px 10px 12px #f0f0f0;
+          }
+    }
+
+    /*scrollbar end*/
     #baus1{
+        height: 50px;
+        width: 50px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        background-image: url("/loot-league/static/imageAs/hextec.png");
+        background-size: contain;
         display:none;
     }
     #nums{
@@ -59,9 +98,8 @@
     margin-left: 10px;
 }
 #rights{
+    overflow: hidden;
     box-sizing: border-box;
-        border: 2px dotted white;
-
     float: right;
     background-color:rgb(0, 18, 33);
     height: 100vh;
@@ -71,6 +109,7 @@
     }
 }
 #showR{
+    overflow: hidden;
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;

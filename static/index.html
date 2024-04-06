@@ -13,18 +13,15 @@
     <div id="leftsInMcseeeNums">
         <!-- index -->
     <div id="indL">
-        <!-- deixei o texto "index" em pre formatado-->
-            <pre>I
-N
-D
-E
-X
-            </pre>
+            <button class="bin"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
+            <button class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" alt=""></button>
+            <button class="bin"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
+            <button class="bin"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
         </div>
         <!-- materiais etc  e numeros + botao add bau embaixo -->
         <div id="mcseeeNnums">
             <!-- materiais etc -->
-            <div id="mcseee">
+            <div id="mcseee" class="scrollb">
                 <h1>coisinho de busca<br>_______________</h1>
                 <div id="materiais">
                     <h3>materiais</h3>
@@ -66,7 +63,7 @@ X
     document.getElementById("chaves").innerHTML = inventario[0];
     document.getElementById("baus").innerHTML = inventario[0];
     document.getElementById("baus1").innerHTML = inventario[0];
-    document.getElementById("baus1").style.display = "block";
+    document.getElementById("baus1").style.display = "flex";
     }
     //display menu acao bau
     function bshow(){
@@ -99,6 +96,8 @@ X
                     var item = rannum(168)+"C";
                     //cria botao do item
                     butt = document.createElement("button");
+                    butt.style.height = "50px";
+                    butt.style.width = "50px";
                     //texto para o botao
                     text = document.createTextNode(item);
                     //adiciona texto ao botao
@@ -112,6 +111,8 @@ X
                 //skin
                 var item = rannum(35)+"S";
                     butt = document.createElement("button");
+                    butt.style.height = "50px";
+                    butt.style.width = "50px";
                     text = document.createTextNode(item);
                     butt.appendChild(text);
 
@@ -135,6 +136,8 @@ X
                     //champ
                     var item = rannum(168)+"C";
                     butt = document.createElement("button");
+                    butt.style.height = "50px";
+                    butt.style.width = "50px";
                     text = document.createTextNode(item);
                     butt.appendChild(text);
 
@@ -145,6 +148,8 @@ X
                     //skin 
                 var item = rannum(35)+"S";
                     butt = document.createElement("button");
+                    butt.style.height = "50px";
+                    butt.style.width = "50px";
                     text = document.createTextNode(item);
                     butt.appendChild(text);
 
