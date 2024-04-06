@@ -49,7 +49,7 @@ X
     <div id="rights">
         <h1>abertura baus etc</h1>
         <div id="showR">
-            <button type="button" onclick="baction()" id="acaoSh">acao</button>
+            <button type="button" onclick="baction();banum()" id="acaoSh">acao</button>
         </div>
     </div>
 </div>
@@ -72,6 +72,7 @@ X
     function bshow(){
         document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
         document.getElementById("acaoSh").innerHTML = "ABRIR";
+        document.getElementById("baus1").innerHTML = inventario[0]+"(-1)";
         document.getElementById("showR").style.display = "block";
     }
     //acao abrir bau
@@ -80,20 +81,8 @@ X
         // aleatorio se receber mais de 2 itens
         var posI = rannum(2);
         var posBCS, butt, text, elem;
-        //diminuir num de bau e chave do array de inventario **
-        inventario[0] = inventario[0] - 1;
-        //se zero baus -> esconder botao baus *
-        if(inventario[0]===0){
-            document.getElementById("baus1").style.display = "none";
-        }else if(inventario[0]<0){
-            //nao deixa numero negativo de baus e chaves *
-            inventario[0] = 0;
-        }else{}
-        //atualizar valores dos textos
-        document.getElementById("chaves").innerHTML = inventario[0];
-        document.getElementById("baus").innerHTML = inventario[0];
-        document.getElementById("baus1").innerHTML = inventario[0];
         //recebendo itens com "S" e "C", devem ser retirados pro sql, estao so pra teste do sys antes do DB.
+        //bug baus abrem 2x (erro logico)
         if (posI===0){
             //adicionar item ao materiais
             posBCS = rannum(3);
@@ -166,9 +155,25 @@ X
         }
 
         //final
+        //diminuir num de bau e chave do array de inventario **
+        
+    }
+    function banum(){
+        inventario[0] = inventario[0] - 1;
+
+        //atualizar valores dos textos
+        document.getElementById("chaves").innerHTML = inventario[0];
+        document.getElementById("baus").innerHTML = inventario[0];
+        document.getElementById("baus1").innerHTML = inventario[0];
         //hide menu acao bau
         document.getElementById("showR").style.display = "none";
-        
+        //se zero baus -> esconder botao baus *
+        if(inventario[0]===0){
+            document.getElementById("baus1").style.display = "none";
+        }else if(inventario[0]<0){
+            //nao deixa numero negativo de baus e chaves *
+            inventario[0] = 0;
+        }else{}
     }
     //numero aleatorio entre 0  e  <numb>
     function rannum(numb){
