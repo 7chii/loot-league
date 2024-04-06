@@ -69,12 +69,19 @@
     }
 }
 #showR{
-    background: #FF7A59;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
   width: 500px;
   height: 500px;
   border-radius: 50%;
   margin-left: 20%;
   display: none;
-  align-items: center;
+  align-items: flex-end;
   text-align: center;
+}
+#acaoSh{
+    position:absolute;
+    margin-bottom: 15%;
+    bottom: 0;
 }

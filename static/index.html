@@ -28,8 +28,6 @@ X
                 <h1>coisinho de busca<br>_______________</h1>
                 <div id="materiais">
                     <h3>materiais</h3>
-                    <!--BOTAO REFRESH DE ITENS DO INVENTARIO SOLUCAO POR AGORA-->
-                    <button id="FORNOW" onclick="funcrefr()">refr</button>
                     <button id="baus1" onclick="bshow()"></button>
                 </div>
             </div>
@@ -51,7 +49,7 @@ X
     <div id="rights">
         <h1>abertura baus etc</h1>
         <div id="showR">
-            <h1>.</h1>
+            <button type="button" onclick="baction()" id="acaoSh">acao</button>
         </div>
     </div>
 </div>
@@ -61,7 +59,8 @@ X
     //valores da sessao
     document.getElementById("EAZ").innerHTML = inventario[1];
     document.getElementById("ELA").innerHTML = inventario[2];
-
+    
+    //add bau + mostrar botao bau
     function bacha(){
     inventario[0]=inventario[0]+1;
     document.getElementById("chaves").innerHTML = inventario[0];
@@ -69,11 +68,111 @@ X
     document.getElementById("baus1").innerHTML = inventario[0];
     document.getElementById("baus1").style.display = "block";
     }
-    function funcrefr(){
-        document.getElementById("baus1").innerHTML = inventario[0].toString();
-    }
+    //display menu acao bau
     function bshow(){
+        document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
+        document.getElementById("acaoSh").innerHTML = "ABRIR";
         document.getElementById("showR").style.display = "block";
+    }
+    //acao abrir bau
+    //arrumar os botoes adicionados colocando o menu clicavel************
+    function baction(){
+        // aleatorio se receber mais de 2 itens
+        var posI = rannum(2);
+        var posBCS, butt, text, elem;
+        //diminuir num de bau e chave do array de inventario **
+        inventario[0] = inventario[0] - 1;
+        //se zero baus -> esconder botao baus *
+        if(inventario[0]===0){
+            document.getElementById("baus1").style.display = "none";
+        }else if(inventario[0]<0){
+            //nao deixa numero negativo de baus e chaves *
+            inventario[0] = 0;
+        }else{}
+        //atualizar valores dos textos
+        document.getElementById("chaves").innerHTML = inventario[0];
+        document.getElementById("baus").innerHTML = inventario[0];
+        document.getElementById("baus1").innerHTML = inventario[0];
+        //recebendo itens com "S" e "C", devem ser retirados pro sql, estao so pra teste do sys antes do DB.
+        if (posI===0){
+            //adicionar item ao materiais
+            posBCS = rannum(3);
+            switch(posBCS){
+                case 0:
+                    //caso recebeu bau
+                    inventario[0] = inventario[0]+1;
+                    document.getElementById("chaves").innerHTML = inventario[0];
+                    document.getElementById("baus").innerHTML = inventario[0];
+                    document.getElementById("baus1").innerHTML = inventario[0];
+                break;
+                case 1: 
+                    //champ
+                    var item = rannum(168)+"C";
+                    //cria botao do item
+                    butt = document.createElement("button");
+                    //texto para o botao
+                    text = document.createTextNode(item);
+                    //adiciona texto ao botao
+                    butt.appendChild(text);
+
+                    //adiciona botao ao div materiais
+                    elem = document.getElementById("materiais");
+                    elem.appendChild(butt);
+                break;
+                case 2: 
+                //skin
+                var item = rannum(35)+"S";
+                    butt = document.createElement("button");
+                    text = document.createTextNode(item);
+                    butt.appendChild(text);
+
+                    elem = document.getElementById("materiais");
+                    elem.appendChild(butt);
+                break;
+            }
+        }else{
+            //func se roda se mais de 1 item
+            baction();
+            posBCS = rannum(3);
+            switch(posBCS){
+                case 0:
+                    //caso recebeu bau
+                    inventario[0] = inventario[0]+1;
+                    document.getElementById("chaves").innerHTML = inventario[0];
+                    document.getElementById("baus").innerHTML = inventario[0];
+                    document.getElementById("baus1").innerHTML = inventario[0];
+                break;
+                case 1: 
+                    //champ
+                    var item = rannum(168)+"C";
+                    butt = document.createElement("button");
+                    text = document.createTextNode(item);
+                    butt.appendChild(text);
+
+                    elem = document.getElementById("materiais");
+                    elem.appendChild(butt);
+                break;
+                case 2:
+                    //skin 
+                var item = rannum(35)+"S";
+                    butt = document.createElement("button");
+                    text = document.createTextNode(item);
+                    butt.appendChild(text);
+
+                    elem = document.getElementById("materiais");
+                    elem.appendChild(butt);
+                break;
+            }
+        }
+
+        //final
+        //hide menu acao bau
+        document.getElementById("showR").style.display = "none";
+        
+    }
+    //numero aleatorio entre 0  e  <numb>
+    function rannum(numb){
+        return Math.floor(Math.random() * numb);
     }
 </script>
 </body>

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mariana Pacheco Pereira <7chii>, ",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
