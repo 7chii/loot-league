@@ -53,10 +53,19 @@ app.get('/loot-league/static/imageAs/skinsin.png', (req, res)=>{
 app.post('/img', (req, res)=>{
     const {id} = req.body;
     const {authorization} = req.headers;
-            console.log(id);
-            console.log(authorization);
-       console.log(blob);
-       const str = `SELECT splash FROM champ WHERE id='${id}';`;
+            //console.log(id);
+            //console.log(authorization);
+            const str = `SELECT splash FROM champ WHERE id='${id}'`;
+            db.query(str, (err, result)=>{
+                if (err) throw err;
+                const dat = Buffer.from(result[0].splash);
+                var string = dat.toString('base64');
+                var partS = string.split('jpegbase64');
+                res.send(`"${partS[1]}"`);
+            })
+       /*console.log(blob);
+       const str = `SELECT splash FROM champ WHERE id=?`;
+       var values = {id};
     db.query(str, (err, result)=>{
         if (err) throw err;
         const dat = Buffer.from(result[0].splash);
@@ -64,7 +73,7 @@ app.post('/img', (req, res)=>{
         var partS = string.split('jpegbase64');
         res.send(`<img src="data:image/jpg;base64, ${partS[1]}" alt="" height="900">`);
         //console.log(partS[1]);
-    })
+    })*/
 });
 
 //listen da porta 8080

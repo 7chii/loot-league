@@ -65,8 +65,8 @@
 <script>
     //funcao json b64 to src img
     function crimg(data, num){
-            var img = document.getElementById(`img${num}`);
-            img.src = "data:image/jpg;base64, "+data;
+            var img = num;
+            img.src = ("data:image/jpg;base64, "+data).toString;
                 };
     //funcao post /img
     
@@ -124,8 +124,8 @@
 
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
-                    imagem.id = `img${item}`;
-                    butt.innerHTML = imagem;
+                    imagem.id = `"img${item}"`;
+                  
 
                     //texto para o botao
                     text = document.createTextNode(item);
@@ -144,10 +144,13 @@
                     .then((res) => {
                         return res.json();
                     })
-                    .then((data) => crimg(data, item));
+                    .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
+                butt.innerHTML = imagem;
+                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
+                    
                 break;
                 case 2: 
                 //skin
@@ -161,8 +164,8 @@
                     
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
-                    imagem.id = `img${item}`;
-                    butt.innerHTML = imagem;
+                    imagem.id = `"img${item}"`;
+                    
 
                     //texto para o botao
                     text = document.createTextNode(item);
@@ -181,10 +184,13 @@
                     .then((res) => {
                         return res.json();
                     })
-                    .then((data) => crimg(data, item));
+                    .then((data) => crimg(data, imagem));
+                    butt.innerHTML = imagem;
+                    console.log(butt);
                 //adiciona botao ao div materiais
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
+                    
                 break;
             }
         }else{
@@ -211,8 +217,8 @@
                     
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
-                    imagem.id = `img${item}`;
-                    butt.innerHTML = imagem;
+                    imagem.id = `"img${item}"`;
+               
 
                     //texto para o botao
                     text = document.createTextNode(item);
@@ -231,10 +237,13 @@
                     .then((res) => {
                         return res.json();
                     })
-                    .then((data) => crimg(data, item));
+                    .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
+                butt.innerHTML = imagem;
+                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
+                    console.log(data);
                 break;
                 case 2:
                     //skin 
@@ -248,8 +257,8 @@
                    
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
-                    imagem.id = `img${item}`;
-                    butt.innerHTML = imagem;
+                    imagem.id = `"img${item}"`;
+                  
 
                     //texto para o botao
                     text = document.createTextNode(item);
@@ -268,10 +277,13 @@
                     .then((res) => {
                         return res.json();
                     })
-                    .then((data) => crimg(data, item));
+                    .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
+                butt.innerHTML = imagem;
+                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
+                    
                 break;
             }
         }
