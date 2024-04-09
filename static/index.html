@@ -66,7 +66,7 @@
     //funcao json b64 to src img
     function crimg(data, num){
             var img = num;
-            img.src = ("data:image/jpg;base64, "+data).toString;
+            img.src = "data:image/jpg;base64,"+data;
                 };
     //funcao post /img
     
@@ -125,12 +125,14 @@
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
                     imagem.id = `"img${item}"`;
+                    imagem.className = "moldicon";
+                    
                   
 
                     //texto para o botao
                     text = document.createTextNode(item);
                     //adiciona texto ao botao
-                    butt.appendChild(text);
+                    ////butt.appendChild(text);
                     fetch('/img', {
                     method: 'POST',
                     headers: {
@@ -146,7 +148,7 @@
                     })
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
-                butt.innerHTML = imagem;
+                butt.appendChild(imagem);
                 console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
@@ -165,12 +167,12 @@
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
                     imagem.id = `"img${item}"`;
-                    
+                    imagem.className = "moldicon";
 
                     //texto para o botao
-                    text = document.createTextNode(item);
+                    //text = document.createTextNode(item);
                     //adiciona texto ao botao
-                    butt.appendChild(text);
+                    //butt.appendChild(text);
                     fetch('/img', {
                     method: 'POST',
                     headers: {
@@ -185,7 +187,7 @@
                         return res.json();
                     })
                     .then((data) => crimg(data, imagem));
-                    butt.innerHTML = imagem;
+                    butt.appendChild(imagem);
                     console.log(butt);
                 //adiciona botao ao div materiais
                     elem = document.getElementById("materiais");
@@ -218,12 +220,13 @@
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
                     imagem.id = `"img${item}"`;
+                    imagem.className = "moldicon";
                
 
                     //texto para o botao
-                    text = document.createTextNode(item);
+                    //text = document.createTextNode(item);
                     //adiciona texto ao botao
-                    butt.appendChild(text);
+                    //butt.appendChild(text);
                     fetch('/img', {
                     method: 'POST',
                     headers: {
@@ -239,7 +242,7 @@
                     })
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
-                butt.innerHTML = imagem;
+                butt.appendChild(imagem);
                 console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
@@ -258,12 +261,13 @@
                     //criar imagem para mostrar campeao
                     imagem = document.createElement("img");
                     imagem.id = `"img${item}"`;
-                  
+                    imagem.className = "moldicon";
+
 
                     //texto para o botao
-                    text = document.createTextNode(item);
+                    //text = document.createTextNode(item);
                     //adiciona texto ao botao
-                    butt.appendChild(text);
+                    //butt.appendChild(text);
                     fetch('/img', {
                     method: 'POST',
                     headers: {
@@ -279,7 +283,7 @@
                     })
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
-                butt.innerHTML = imagem;
+                butt.appendChild(imagem);
                 console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);

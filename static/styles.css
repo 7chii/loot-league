@@ -172,6 +172,11 @@
   align-items: flex-end;
   text-align: center;
 }
+.moldicon{
+    align-self: center;
+    height: 100%;
+    width: 100%;
+}
 #acaoSh{
     position:absolute;
     margin-bottom: 15%;
