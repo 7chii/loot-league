@@ -63,6 +63,7 @@
     </div>
 </div>
 <script>
+    var litem = 0;
     //funcao json b64 to src img
     function crimg(data, num){
             var img = num;
@@ -98,8 +99,6 @@
         // aleatorio se receber mais de 2 itens
         var posI = rannum(2);
         var posBCS, butt, text, elem;
-        //recebendo itens com "S" e "C", devem ser retirados pro sql, estao so pra teste do sys antes do DB.
-        //bug baus abrem 2x (erro logico)
         if (posI===0){
             //adicionar item ao materiais
             posBCS = rannum(3);
@@ -114,6 +113,7 @@
                 case 1: 
                     //champ
                     var item = rannum(10);//+"C";
+                    litem = litem+1;
                     var id = item;
                     //cria botao do item
                     butt = document.createElement("button");
@@ -121,14 +121,11 @@
                     butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
-
                     //criar imagem para mostrar campeao
-                    imagem = document.createElement("img");
-                    imagem.id = `"img${item}"`;
+                    var imagem = document.createElement("img");
+                    imagem.id = `"img${litem}"`;
+                    console.log(imagem.id);
                     imagem.className = "moldicon";
-                    
-                  
-
                     //texto para o botao
                     text = document.createTextNode(item);
                     //adiciona texto ao botao
@@ -149,14 +146,13 @@
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
                 butt.appendChild(imagem);
-                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
-                    
                 break;
                 case 2: 
                 //skin
                 var item = rannum(10);//+"S";
+                litem = litem+1;
                 var id = item;
                     butt = document.createElement("button");
                     butt.style.border = "solid rgb(120, 90, 40)";
@@ -165,8 +161,8 @@
                     butt.style.width = "50px";
                     
                     //criar imagem para mostrar campeao
-                    imagem = document.createElement("img");
-                    imagem.id = `"img${item}"`;
+                    var imagem = document.createElement("img");
+                    imagem.id = `"img${litem}"`;
                     imagem.className = "moldicon";
 
                     //texto para o botao
@@ -188,11 +184,9 @@
                     })
                     .then((data) => crimg(data, imagem));
                     butt.appendChild(imagem);
-                    console.log(butt);
                 //adiciona botao ao div materiais
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
-                    
                 break;
             }
         }else{
@@ -210,19 +204,17 @@
                 case 1: 
                     //champ
                     var item = rannum(10);//+"C";
+                    litem = litem+1;
                     var id = item;
                     butt = document.createElement("button");
                     butt.style.border = "solid rgb(120, 90, 40)";
                     butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
-                    
                     //criar imagem para mostrar campeao
-                    imagem = document.createElement("img");
-                    imagem.id = `"img${item}"`;
+                    var imagem = document.createElement("img");
+                    imagem.id = `"img${litem}"`;
                     imagem.className = "moldicon";
-               
-
                     //texto para o botao
                     //text = document.createTextNode(item);
                     //adiciona texto ao botao
@@ -243,27 +235,23 @@
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
                 butt.appendChild(imagem);
-                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
-                    console.log(data);
                 break;
                 case 2:
                     //skin 
                 var item = rannum(10);//+"S";
+                litem = litem+1;
                 var id = item;
                     butt = document.createElement("button");
                     butt.style.border = "solid rgb(120, 90, 40)";
                     butt.style.margin = "2px";
                     butt.style.height = "50px";
                     butt.style.width = "50px";
-                   
                     //criar imagem para mostrar campeao
-                    imagem = document.createElement("img");
-                    imagem.id = `"img${item}"`;
+                    var imagem = document.createElement("img");
+                    imagem.id = `"img${litem}"`;
                     imagem.className = "moldicon";
-
-
                     //texto para o botao
                     //text = document.createTextNode(item);
                     //adiciona texto ao botao
@@ -284,10 +272,8 @@
                     .then((data) => crimg(data, imagem));
                 //adiciona botao ao div materiais
                 butt.appendChild(imagem);
-                console.log(butt);
                     elem = document.getElementById("materiais");
                     elem.appendChild(butt);
-                    
                 break;
             }
         }

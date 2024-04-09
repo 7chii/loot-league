@@ -60,6 +60,8 @@ app.post('/img', (req, res)=>{
                 var string = dat.toString('base64');
                 var partS = string.split('jpegbase64');
                 res.send(`"${partS[1]}"`);
+                console.log(partS[0]+` ${id}`);
+                console.log("fim packt");
             })
 });
 
