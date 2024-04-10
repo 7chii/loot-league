@@ -67,7 +67,8 @@
     //funcao json b64 to src img
     function crimg(data, num){
             var img = num;
-            img.src = "data:image/jpg;base64,"+data;
+            var stringp = data.split('-');
+            img.src = "data:image/jpg;base64, "+stringp[0];
                 };
     //funcao post /img
     
@@ -124,7 +125,6 @@
                     //criar imagem para mostrar campeao
                     var imagem = document.createElement("img");
                     imagem.id = `"img${litem}"`;
-                    console.log(imagem.id);
                     imagem.className = "moldicon";
                     //texto para o botao
                     text = document.createTextNode(item);
@@ -169,7 +169,7 @@
                     //text = document.createTextNode(item);
                     //adiciona texto ao botao
                     //butt.appendChild(text);
-                    fetch('/img', {
+                    fetch('/imgs', {
                     method: 'POST',
                     headers: {
                         Authorization: 'Bearer abcdxyz',
@@ -256,7 +256,7 @@
                     //text = document.createTextNode(item);
                     //adiciona texto ao botao
                     //butt.appendChild(text);
-                    fetch('/img', {
+                    fetch('/imgs', {
                     method: 'POST',
                     headers: {
                         Authorization: 'Bearer abcdxyz',
