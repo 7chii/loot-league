@@ -1,308 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="/loot-league/static/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESPOLIOS</title>
 </head>
+
 <body>
     <div id="grandiv">
         <!-- div lado esquerdo (materiais, "index", 
         numeros de essencia laranja etc listados embaixo)-->
-    <div id="leftsInMcseeeNums">
-        <!-- index -->
-    <div id="indL">
-            <button class="bin"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
-            <button class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" alt=""></button>
-            <button class="bin"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
-            <button class="bin"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
-        </div>
-        <!-- materiais etc  e numeros + botao add bau embaixo -->
-        <div id="mcseeeNnums">
-            <!-- materiais etc -->
-            <div id="mcseee" class="scrollb">
-                <input type="text" placeholder="Buscar" id="sbme">
-                <div class="drop-orgbutt">
-                    <button class="orgbutt">Alfabetico</button>
-                    <div class="orgbutt-content">
-                        <a href="#" onclick="">Alfabetico</a>
-                        <a href="#" onclick="">Valor</a>
-                        <a href="#" onclick="">Raridade</a>
-                        <a href="#" onclick="">Campeao</a>
-                        <a href="#" onclick="">Ativavel</a>
-                        <a href="#" onclick="">Selecao</a>
+        <div id="leftsInMcseeeNums">
+            <!-- index -->
+            <div id="indL">
+                <button class="bin"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
+                <button class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" alt=""></button>
+                <button class="bin"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
+                <button class="bin"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
+            </div>
+            <!-- materiais etc  e numeros + botao add bau embaixo -->
+            <div id="mcseeeNnums">
+                <!-- materiais etc -->
+                <div id="mcseee" class="scrollb">
+                    <input type="text" placeholder="Buscar" id="sbme">
+                    <div class="drop-orgbutt">
+                        <button class="orgbutt">Alfabetico</button>
+                        <div class="orgbutt-content">
+                            <a href="#" onclick="">Alfabetico</a>
+                            <a href="#" onclick="">Valor</a>
+                            <a href="#" onclick="">Raridade</a>
+                            <a href="#" onclick="">Campeao</a>
+                            <a href="#" onclick="">Ativavel</a>
+                            <a href="#" onclick="">Selecao</a>
+                        </div>
+                    </div>
+
+                    <div id="materiais">
+                        <h3>materiais</h3>
+                        <hr>
+                        <button id="baus1" onclick="bshow()"></button>
                     </div>
                 </div>
-                
-                <div id="materiais">
-                    <h3>materiais</h3>
-                    <hr>
-                    <button id="baus1" onclick="bshow()"></button>
+                <!-- numeros + botao bau -->
+                <div id="nums">
+                    <!--botao bau+chave-->
+                    <button type="button" onclick="bacha()" class="info">+B</button>
+                    <!-- paragrafos com essencias(azul e laranja) -->
+                    <p id="EAZ" class="info">~</p>
+                    <p id="ELA" class="info">~</p>
+                    <!--chaves e baus!-->
+                    <p id="chaves" class="info">0</p>
+                    <p id="baus" class="info">0</p>
                 </div>
             </div>
-            <!-- numeros + botao bau -->
-            <div id="nums">
-                <!--botao bau+chave-->
-                <button type="button" onclick="bacha()" class="info">+B</button>
-                <!-- paragrafos com essencias(azul e laranja) -->
-                <p id="EAZ" class="info">~</p>
-                <p id="ELA" class="info">~</p>
-                <!--chaves e baus!-->
-                <p id="chaves" class="info">0</p>
-                <p id="baus" class="info">0</p>
+        </div>
+        <!-- lado direito dos espolios, onde vai mostrar animacoes de abrir bau, 
+        onde o campeao aparece antes de ir pra esquerda etc etc -->
+        <div id="rights">
+            <div id="showR">
+                <img src="" alt="" id="imagemShow">
+                <button type="button" onclick="bacao()" id="acaoSh">acao</button>
             </div>
         </div>
     </div>
-    <!-- lado direito dos espolios, onde vai mostrar animacoes de abrir bau, 
-        onde o campeao aparece antes de ir pra esquerda etc etc -->
-    <div id="rights">
-        <div id="showR">
-            <button type="button" onclick="baction();banum()" id="acaoSh">acao</button>
-        </div>
-    </div>
-</div>
-<script>
-    var litem = 0;
-    //funcao json b64 to src img
-    function crimg(data, num){
-            var img = num;
-            var stringp = data.split('-');
-            img.src = "data:image/jpg;base64, "+stringp[0];
-                };
-    //funcao post /img
-    
+    <script>
+        var litem = 0;
+        var cam = 0;
+        //funcao json b64 to src img
+        function bacao() {
+            if (cam === 1) {
+                baction();
+                banum();
+            } else {
 
-    //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
-    const inventario = [0, 10000, 10000];
-    //valores da sessao
-    document.getElementById("EAZ").innerHTML = inventario[1];
-    document.getElementById("ELA").innerHTML = inventario[2];
-    
-    //add bau + mostrar botao bau
-    function bacha(){
-    inventario[0]=inventario[0]+1;
-    document.getElementById("chaves").innerHTML = inventario[0];
-    document.getElementById("baus").innerHTML = inventario[0];
-    document.getElementById("baus1").innerHTML = inventario[0];
-    document.getElementById("baus1").style.display = "flex";
-    }
-    //display menu acao bau
-    function bshow(){
-        document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
-        document.getElementById("acaoSh").innerHTML = "ABRIR";
-        document.getElementById("baus1").innerHTML = inventario[0]+"<span class='rtex'>(-1)</span>";
-        document.getElementById("showR").style.display = "block";
-    }
-    //acao abrir bau
-    //arrumar os botoes adicionados colocando o menu clicavel************
-    function baction(){
-        // aleatorio se receber mais de 2 itens
-        var posI = rannum(2);
-        var posBCS, butt, text, elem;
-        if (posI===0){
-            //adicionar item ao materiais
-            posBCS = rannum(3);
-            switch(posBCS){
-                case 0:
-                    //caso recebeu bau
-                    inventario[0] = inventario[0]+1;
-                    document.getElementById("chaves").innerHTML = inventario[0];
-                    document.getElementById("baus").innerHTML = inventario[0];
-                    document.getElementById("baus1").innerHTML = inventario[0];
-                break;
-                case 1: 
-                    //champ
-                    var item = rannum(10);//+"C";
-                    litem = litem+1;
-                    var id = item;
-                    //cria botao do item
-                    butt = document.createElement("button");
-                    butt.style.border = "solid rgb(120, 90, 40)";
-                    butt.style.margin = "2px";
-                    butt.style.height = "50px";
-                    butt.style.width = "50px";
-                    //criar imagem para mostrar campeao
-                    var imagem = document.createElement("img");
-                    imagem.id = `"img${litem}"`;
-                    imagem.className = "moldicon";
-                    //texto para o botao
-                    text = document.createTextNode(item);
-                    //adiciona texto ao botao
-                    ////butt.appendChild(text);
-                    fetch('/img', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer abcdxyz',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id
-                    }),
-                })
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((data) => crimg(data, imagem));
-                //adiciona botao ao div materiais
-                butt.appendChild(imagem);
-                    elem = document.getElementById("materiais");
-                    elem.appendChild(butt);
-                break;
-                case 2: 
-                //skin
-                var item = rannum(10);//+"S";
-                litem = litem+1;
-                var id = item;
-                    butt = document.createElement("button");
-                    butt.style.border = "solid rgb(120, 90, 40)";
-                    butt.style.margin = "2px";
-                    butt.style.height = "50px";
-                    butt.style.width = "50px";
-                    
-                    //criar imagem para mostrar campeao
-                    var imagem = document.createElement("img");
-                    imagem.id = `"img${litem}"`;
-                    imagem.className = "moldicon";
-
-                    //texto para o botao
-                    //text = document.createTextNode(item);
-                    //adiciona texto ao botao
-                    //butt.appendChild(text);
-                    fetch('/imgs', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer abcdxyz',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id
-                    }),
-                })
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((data) => crimg(data, imagem));
-                    butt.appendChild(imagem);
-                //adiciona botao ao div materiais
-                    elem = document.getElementById("materiais");
-                    elem.appendChild(butt);
-                break;
-            }
-        }else{
-            //func se roda se mais de 1 item
-            baction();
-            posBCS = rannum(3);
-            switch(posBCS){
-                case 0:
-                    //caso recebeu bau
-                    inventario[0] = inventario[0]+1;
-                    document.getElementById("chaves").innerHTML = inventario[0];
-                    document.getElementById("baus").innerHTML = inventario[0];
-                    document.getElementById("baus1").innerHTML = inventario[0];
-                break;
-                case 1: 
-                    //champ
-                    var item = rannum(10);//+"C";
-                    litem = litem+1;
-                    var id = item;
-                    butt = document.createElement("button");
-                    butt.style.border = "solid rgb(120, 90, 40)";
-                    butt.style.margin = "2px";
-                    butt.style.height = "50px";
-                    butt.style.width = "50px";
-                    //criar imagem para mostrar campeao
-                    var imagem = document.createElement("img");
-                    imagem.id = `"img${litem}"`;
-                    imagem.className = "moldicon";
-                    //texto para o botao
-                    //text = document.createTextNode(item);
-                    //adiciona texto ao botao
-                    //butt.appendChild(text);
-                    fetch('/img', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer abcdxyz',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id
-                    }),
-                })
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((data) => crimg(data, imagem));
-                //adiciona botao ao div materiais
-                butt.appendChild(imagem);
-                    elem = document.getElementById("materiais");
-                    elem.appendChild(butt);
-                break;
-                case 2:
-                    //skin 
-                var item = rannum(10);//+"S";
-                litem = litem+1;
-                var id = item;
-                    butt = document.createElement("button");
-                    butt.style.border = "solid rgb(120, 90, 40)";
-                    butt.style.margin = "2px";
-                    butt.style.height = "50px";
-                    butt.style.width = "50px";
-                    //criar imagem para mostrar campeao
-                    var imagem = document.createElement("img");
-                    imagem.id = `"img${litem}"`;
-                    imagem.className = "moldicon";
-                    //texto para o botao
-                    //text = document.createTextNode(item);
-                    //adiciona texto ao botao
-                    //butt.appendChild(text);
-                    fetch('/imgs', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer abcdxyz',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id
-                    }),
-                })
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((data) => crimg(data, imagem));
-                //adiciona botao ao div materiais
-                butt.appendChild(imagem);
-                    elem = document.getElementById("materiais");
-                    elem.appendChild(butt);
-                break;
             }
         }
+        function crimg(data, num) {
+            var img = num;
+            var stringp = data.split('-');
+            img.src = "data:image/jpg;base64, " + stringp[0];
+        };
+        //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
+        const inventario = [0, 10000, 10000];
+        //valores da sessao
+        document.getElementById("EAZ").innerHTML = inventario[1];
+        document.getElementById("ELA").innerHTML = inventario[2];
 
-        //final
-        //diminuir num de bau e chave do array de inventario **
-        
-    }
-    function banum(){
-        inventario[0] = inventario[0] - 1;
+        //add bau + mostrar botao bau
+        function bacha() {
+            inventario[0] = inventario[0] + 1;
+            document.getElementById("chaves").innerHTML = inventario[0];
+            document.getElementById("baus").innerHTML = inventario[0];
+            document.getElementById("baus1").innerHTML = inventario[0];
+            document.getElementById("baus1").style.display = "flex";
+        }
+        //display menu acao bau
+        function bshow() {
+            cam = 1;
+            document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
+            document.getElementById("acaoSh").innerHTML = "ABRIR";
+            document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
+            document.getElementById("showR").style.display = "block";
+        }
+        function ishow(img) {
+            var h = document.getElementById(`"${img}"`);
+            document.getElementById("imagemShow").src = h.src;
+            document.getElementById("acaoSh").innerHTML = "APRIMORAR";
+            document.getElementById("showR").style.display = "block";
+        }
+        //acao abrir bau
+        //arrumar os botoes adicionados colocando o menu clicavel************
+        function baction() {
+            // aleatorio se receber mais de 2 itens
+            var posI = rannum(2);
+            var posBCS, butt, text, elem;
+            if (posI === 0) {
+                //adicionar item ao materiais
+                posBCS = rannum(3);
+                switch (posBCS) {
+                    case 0:
+                        //caso recebeu bau
+                        inventario[0] = inventario[0] + 1;
+                        document.getElementById("chaves").innerHTML = inventario[0];
+                        document.getElementById("baus").innerHTML = inventario[0];
+                        document.getElementById("baus1").innerHTML = inventario[0];
+                        break;
+                    case 1:
+                        //champ
+                        var item = rannum(10);//+"C";
+                        litem = litem + 1;
+                        var id = item;
+                        //cria botao do item
+                        butt = document.createElement("button");
+                        butt.style.border = "solid rgb(120, 90, 40)";
+                        butt.style.margin = "2px";
+                        butt.style.height = "50px";
+                        butt.style.width = "50px";
+                        
+                        //criar imagem para mostrar campeao
+                        var imagem = document.createElement("img");
+                        imagem.id = `"img${litem}"`;
+                        imagem.className = "moldicon";
+                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        //texto para o botao
+                        text = document.createTextNode(item);
+                        //adiciona texto ao botao
+                        ////butt.appendChild(text);
+                        fetch('/img', {
+                            method: 'POST',
+                            headers: {
+                                Authorization: 'lootl',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                id
+                            }),
+                        })
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((data) => crimg(data, imagem));
+                        //adiciona botao ao div materiais
 
-        //atualizar valores dos textos
-        document.getElementById("chaves").innerHTML = inventario[0];
-        document.getElementById("baus").innerHTML = inventario[0];
-        document.getElementById("baus1").innerHTML = inventario[0];
-        //hide menu acao bau
-        document.getElementById("showR").style.display = "none";
-        //se zero baus -> esconder botao baus *
-        if(inventario[0]===0){
-            document.getElementById("baus1").style.display = "none";
-        }else if(inventario[0]<0){
-            //nao deixa numero negativo de baus e chaves *
-            inventario[0] = 0;
-        }else{}
-    }
-    //numero aleatorio entre 0  e  <numb>
-    function rannum(numb){
-        return Math.floor(Math.random() * numb);
-    }
-</script>
+                        butt.appendChild(imagem);
+                        elem = document.getElementById("materiais");
+                        elem.appendChild(butt);
+                        break;
+                    case 2:
+                        //skin
+                        var item = rannum(10);//+"S";
+                        litem = litem + 1;
+                        var id = item;
+                        butt = document.createElement("button");
+                        butt.style.border = "solid rgb(120, 90, 40)";
+                        butt.style.margin = "2px";
+                        butt.style.height = "50px";
+                        butt.style.width = "50px";
+                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        //criar imagem para mostrar campeao
+                        var imagem = document.createElement("img");
+                        imagem.id = `"img${litem}"`;
+                        imagem.className = "moldicon";
+
+                        //texto para o botao
+                        //text = document.createTextNode(item);
+                        //adiciona texto ao botao
+                        //butt.appendChild(text);
+                        fetch('/imgs', {
+                            method: 'POST',
+                            headers: {
+                                Authorization: 'lootl',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                id
+                            }),
+                        })
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((data) => crimg(data, imagem));
+                        butt.appendChild(imagem);
+                        //adiciona botao ao div materiais
+                        elem = document.getElementById("materiais");
+                        elem.appendChild(butt);
+                        break;
+                }
+            } else {
+                //func se roda se mais de 1 item
+                baction();
+                posBCS = rannum(3);
+                switch (posBCS) {
+                    case 0:
+                        //caso recebeu bau
+                        inventario[0] = inventario[0] + 1;
+                        document.getElementById("chaves").innerHTML = inventario[0];
+                        document.getElementById("baus").innerHTML = inventario[0];
+                        document.getElementById("baus1").innerHTML = inventario[0];
+                        break;
+                    case 1:
+                        //champ
+                        var item = rannum(10);
+                        litem = litem + 1;
+                        var id = item;
+                        butt = document.createElement("button");
+                        butt.style.border = "solid rgb(120, 90, 40)";
+                        butt.style.margin = "2px";
+                        butt.style.height = "50px";
+                        butt.style.width = "50px";
+                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        //criar imagem para mostrar campeao
+                        var imagem = document.createElement("img");
+                        imagem.id = `"img${litem}"`;
+                        imagem.className = "moldicon";
+                        //texto para o botao
+                        //text = document.createTextNode(item);
+                        //adiciona texto ao botao
+                        //butt.appendChild(text);
+                        fetch('/img', {
+                            method: 'POST',
+                            headers: {
+                                Authorization: 'lootl',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                id
+                            }),
+                        })
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((data) => crimg(data, imagem));
+                        //adiciona botao ao div materiais
+                        butt.appendChild(imagem);
+                        elem = document.getElementById("materiais");
+                        elem.appendChild(butt);
+                        break;
+                    case 2:
+                        //skin 
+                        var item = rannum(10);//+"S";
+                        litem = litem + 1;
+                        var id = item;
+                        butt = document.createElement("button");
+                        butt.style.border = "solid rgb(120, 90, 40)";
+                        butt.style.margin = "2px";
+                        butt.style.height = "50px";
+                        butt.style.width = "50px";
+                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        //criar imagem para mostrar campeao
+                        var imagem = document.createElement("img");
+                        imagem.id = `"img${litem}"`;
+                        imagem.className = "moldicon";
+                        //texto para o botao
+                        //text = document.createTextNode(item);
+                        //adiciona texto ao botao
+                        //butt.appendChild(text);
+                        fetch('/imgs', {
+                            method: 'POST',
+                            headers: {
+                                Authorization: 'lootl',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                id
+                            }),
+                        })
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((data) => crimg(data, imagem));
+                        //adiciona botao ao div materiais
+                        butt.appendChild(imagem);
+                        elem = document.getElementById("materiais");
+                        elem.appendChild(butt);
+                        break;
+                }
+            }
+
+            //final
+            //diminuir num de bau e chave do array de inventario **
+
+        }
+        function banum() {
+            inventario[0] = inventario[0] - 1;
+
+            //atualizar valores dos textos
+            document.getElementById("chaves").innerHTML = inventario[0];
+            document.getElementById("baus").innerHTML = inventario[0];
+            document.getElementById("baus1").innerHTML = inventario[0];
+            //hide menu acao bau
+            document.getElementById("showR").style.display = "none";
+            //se zero baus -> esconder botao baus *
+            if (inventario[0] === 0) {
+                document.getElementById("baus1").style.display = "none";
+            } else if (inventario[0] < 0) {
+                //nao deixa numero negativo de baus e chaves *
+                inventario[0] = 0;
+            } else { }
+        }
+        //numero aleatorio entre 0  e  <numb>
+        function rannum(numb) {
+            return Math.floor(Math.random() * numb);
+        }
+    </script>
 </body>
+
 </html>
