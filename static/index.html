@@ -102,12 +102,14 @@
             document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
             document.getElementById("acaoSh").innerHTML = "ABRIR";
             document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
+            document.getElementById("imagemShow").style.display = "none";
             document.getElementById("showR").style.display = "block";
         }
         function ishow(img) {
             var h = document.getElementById(`"${img}"`);
             document.getElementById("imagemShow").src = h.src;
             document.getElementById("acaoSh").innerHTML = "APRIMORAR";
+            document.getElementById("imagemShow").style.display = "block";
             document.getElementById("showR").style.display = "block";
         }
         //acao abrir bau
