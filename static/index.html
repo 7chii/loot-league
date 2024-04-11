@@ -60,7 +60,6 @@
         onde o campeao aparece antes de ir pra esquerda etc etc -->
         <div id="rights">
             <div id="showR">
-                <img src="" alt="" id="imagemShow">
                 <button type="button" onclick="bacao()" id="acaoSh">acao</button>
             </div>
         </div>
@@ -74,14 +73,16 @@
             if (cam === 1) {
                 baction();
                 banum();
-            } else {
-
+            } else if(cam===2){
+                
             }
         }
-        function crimg(data, num) {
+        function crimg(data, num, butt) {
+            var but = butt;
             var img = num;
             var stringp = data.split('-');
             img.src = "data:image/jpg;base64, " + stringp[0];
+            butt.setAttribute("name", stringp[1]+"-"+stringp[2]+"-"+stringp[3]);
         };
         //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
         const inventario = [0, 10000, 10000];
@@ -103,18 +104,44 @@
             document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
             document.getElementById("acaoSh").innerHTML = "ABRIR";
             document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
-            document.getElementById("imagemShow").style.display = "none";
+            document.getElementById("acaoSh").setAttribute( "onClick", "baction();banum()" );
             document.getElementById("showR").style.display = "block";
         }
-        function ishow(img) {
-            var h = document.getElementById(`"${img}"`);
-            document.getElementById("imagemShow").src = h.src;
+        function ishow(img, bot) {
+            cam = 2;
+            var h = document.getElementById(`${img}`);
+            document.getElementById("showR").style.backgroundImage = 'url("'+h.src+'")';
             document.getElementById("acaoSh").innerHTML = "APRIMORAR";
-            document.getElementById("imagemShow").style.display = "block";
+            document.getElementById("acaoSh").setAttribute( "onClick", `champC(${bot})` );
             document.getElementById("showR").style.display = "block";
+
+        }
+        function champC(img){
+            var struse = img.getAttribute("name");
+            var strina = struse.split('-');
+            var custo = strina[1];
+            inventario[1] = inventario[1] - custo;
+            esnum();
+            img.remove();
+            document.getElementById("showR").style.display = "none";
+        }
+        function champV(img){
+            var struse = img.getAttribute("name");
+            var strina = struse.split('-');
+            var valor = strina[2];
+            inventario[1] = inventario[1] + +valor;
+            esnum();
+            img.remove();
+            document.getElementById("showR").style.display = "none";
+        }
+        function champClick(string){
+            var stringsp = string.split('-');
+            var bot = stringsp[0];
+            var img = stringsp[1];
+            ishow(img, bot);
+            //champC(bot);
         }
         //acao abrir bau
-        //arrumar os botoes adicionados colocando o menu clicavel************
         function baction() {
             // aleatorio se receber mais de 2 itens
             var posI = rannum(2);
@@ -130,12 +157,12 @@
                         document.getElementById("baus").innerHTML = inventario[0];
                         document.getElementById("baus1").innerHTML = inventario[0];
                         */
-                       receb = 1;
+                        receb = receb + 1;
                         //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
                         //champ
-                        var item = rannum(10);//+"C";
+                        var item = rannum(10);
                         litem = litem + 1;
                         var id = item;
                         //cria botao do item
@@ -147,9 +174,10 @@
                         
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
-                        imagem.id = `"img${litem}"`;
+                        butt.id = `butt${litem}`;
+                        imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
-                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
                         //texto para o botao
                         text = document.createTextNode(item);
                         //adiciona texto ao botao
@@ -167,7 +195,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem));
+                            .then((data) => crimg(data, imagem, butt));
                         //adiciona botao ao div materiais
 
                         butt.appendChild(imagem);
@@ -184,11 +212,13 @@
                         butt.style.margin = "2px";
                         butt.style.height = "50px";
                         butt.style.width = "50px";
-                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
-                        //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
-                        imagem.id = `"img${litem}"`;
+                        butt.id = `butt${litem}`;
+                        imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
+                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
+                        //criar imagem para mostrar campeao
+                        
 
                         //texto para o botao
                         //text = document.createTextNode(item);
@@ -207,7 +237,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem));
+                            .then((data) => crimg(data, imagem, butt));
                         butt.appendChild(imagem);
                         //adiciona botao ao div materiais
                         elem = document.getElementById("materiais");
@@ -225,7 +255,7 @@
                         /*document.getElementById("chaves").innerHTML = inventario[0];
                         document.getElementById("baus").innerHTML = inventario[0];
                         document.getElementById("baus1").innerHTML = inventario[0];*/
-                        receb = 1;
+                        receb = receb + 1;
                         //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
@@ -238,11 +268,12 @@
                         butt.style.margin = "2px";
                         butt.style.height = "50px";
                         butt.style.width = "50px";
-                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
-                        imagem.id = `"img${litem}"`;
+                        butt.id = `butt${litem}`;
+                        imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
+                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
                         //texto para o botao
                         //text = document.createTextNode(item);
                         //adiciona texto ao botao
@@ -260,7 +291,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem));
+                            .then((data) => crimg(data, imagem, butt));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
@@ -276,11 +307,13 @@
                         butt.style.margin = "2px";
                         butt.style.height = "50px";
                         butt.style.width = "50px";
-                        butt.setAttribute( "onClick", `ishow("img${litem}")` );
+                        
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
-                        imagem.id = `"img${litem}"`;
+                        butt.id = `butt${litem}`;
+                        imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
+                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
                         //texto para o botao
                         //text = document.createTextNode(item);
                         //adiciona texto ao botao
@@ -298,7 +331,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem));
+                            .then((data) => crimg(data, imagem, butt));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
@@ -311,17 +344,21 @@
             //diminuir num de bau e chave do array de inventario **
 
         }
+        function esnum(){
+            document.getElementById("EAZ").innerHTML = inventario[1];
+            document.getElementById("ELA").innerHTML = inventario[2];
+        }
         function banum() {
             inventario[0] = inventario[0] - 1;
 
             //atualizar valores dos textos
             document.getElementById("chaves").innerHTML = inventario[0];
             document.getElementById("baus").innerHTML = inventario[0];
-            if(receb===1){
-                document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
-                receb = 0;
-            }else{
+            if(receb===0){
                 document.getElementById("baus1").innerHTML = inventario[0];
+            }else{
+                document.getElementById("baus1").innerHTML = "<span class='gtex'>(+"+receb+")</span>"+inventario[0];
+                receb = 0;
             }
             //hide menu acao bau
             document.getElementById("showR").style.display = "none";
