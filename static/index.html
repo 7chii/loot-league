@@ -68,6 +68,7 @@
     <script>
         var litem = 0;
         var cam = 0;
+        var receb = 0;
         //funcao json b64 to src img
         function bacao() {
             if (cam === 1) {
@@ -125,9 +126,12 @@
                     case 0:
                         //caso recebeu bau
                         inventario[0] = inventario[0] + 1;
-                        document.getElementById("chaves").innerHTML = inventario[0];
+                        /*document.getElementById("chaves").innerHTML = inventario[0];
                         document.getElementById("baus").innerHTML = inventario[0];
                         document.getElementById("baus1").innerHTML = inventario[0];
+                        */
+                       receb = 1;
+                        //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
                         //champ
@@ -218,9 +222,11 @@
                     case 0:
                         //caso recebeu bau
                         inventario[0] = inventario[0] + 1;
-                        document.getElementById("chaves").innerHTML = inventario[0];
+                        /*document.getElementById("chaves").innerHTML = inventario[0];
                         document.getElementById("baus").innerHTML = inventario[0];
-                        document.getElementById("baus1").innerHTML = inventario[0];
+                        document.getElementById("baus1").innerHTML = inventario[0];*/
+                        receb = 1;
+                        //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
                         //champ
@@ -311,7 +317,12 @@
             //atualizar valores dos textos
             document.getElementById("chaves").innerHTML = inventario[0];
             document.getElementById("baus").innerHTML = inventario[0];
-            document.getElementById("baus1").innerHTML = inventario[0];
+            if(receb===1){
+                document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
+                receb = 0;
+            }else{
+                document.getElementById("baus1").innerHTML = inventario[0];
+            }
             //hide menu acao bau
             document.getElementById("showR").style.display = "none";
             //se zero baus -> esconder botao baus *
@@ -321,6 +332,7 @@
                 //nao deixa numero negativo de baus e chaves *
                 inventario[0] = 0;
             } else { }
+            document.getElementsByClassName("gtex").display = "none";
         }
         //numero aleatorio entre 0  e  <numb>
         function rannum(numb) {

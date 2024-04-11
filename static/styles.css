@@ -129,6 +129,34 @@
     .rtex{
         color:red;
     }
+    .gtex{
+        color:greenyellow;
+        animation-name: gtexto;
+	    animation-duration: 2s;
+	    animation-iteration-count: 1;
+	    animation-timing-function: linear;
+	    animation-fill-mode: forwards;
+        
+    }
+    @keyframes gtexto {
+        0%{
+            opacity: 0;
+            display:flex;
+        }
+        25%{
+            opacity: 1;
+        }
+        50%{
+            opacity: 1;
+        }
+        75%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 0;
+            display:none;
+        }
+    }
     #nums{
         box-sizing: border-box;
         /* trocar border por um coisinho de scroll (pra quem for fazer)*/
