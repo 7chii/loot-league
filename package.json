@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Mariana Pacheco Pereira <7chii>, ",
+  "author": "Mariana Pacheco Pereira <7chii>, "Felipe Neves Lopes Diniz <lipefp>", "
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
