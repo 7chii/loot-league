@@ -13,17 +13,23 @@
     <div id="mymodal" class="modal">
         <div class="modalCont">
             <span class="close">&times;</span>
-            <h2></h2>
             <div id="colec">
-
             </div>
         </div>
     </div>
+    
 
     <div id="grandiv">
         <!-- div lado esquerdo (materiais, "index", 
         numeros de essencia laranja etc listados embaixo)-->
         <div id="leftsInMcseeeNums">
+            <div id="drop-choice" class="modol">
+                <div class="choicecont">
+                    <!--<span class="closech"></span>-->
+                    <button id="butap" onclick="">Aprimorar</button>
+                    <button id="butde" onclick="">Desencantar</button>
+                </div>
+            </div>
             <!-- index -->
             <div id="indL">
                 <button class="bin" id="btncol"><img src="/loot-league/static/imageAs/collmod.png" alt=""></button>
@@ -40,15 +46,12 @@
                     <div class="drop-orgbutt">
                         <button class="orgbutt">Alfabetico</button>
                         <div class="orgbutt-content">
-                            <a href="#" onclick="">Alfabetico</a>
-                            <a href="#" onclick="">Valor</a>
-                            <a href="#" onclick="">Raridade</a>
-                            <a href="#" onclick="">Campeao</a>
-                            <a href="#" onclick="">Ativavel</a>
-                            <a href="#" onclick="">Selecao</a>
+                            <button class="org" onclick="">Alfabetico</button>
+                            <button class="org" onclick="">Valor</button>
+                            <button class="org" onclick="">Campeao</button>
+                            <button class="org" onclick="">Skin</button>
                         </div>
                     </div>
-
                     <div id="materiais">
                         <h3>materiais</h3>
                         <hr>
@@ -80,6 +83,7 @@
         var litem = 0;
         var cam = 0;
         var receb = 0;
+        var modo = document.getElementById("drop-choice");
         //funcao json b64 to src img
         function bacao() {
             if (cam === 1) {
@@ -89,12 +93,13 @@
                 
             }
         }
-        function crimg(data, num, butt) {
+        function crimg(data, num, butt, tipo) {
             var but = butt;
             var img = num;
             var stringp = data.split('-');
             img.src = "data:image/jpg;base64, " + stringp[0];
-            butt.setAttribute("name", stringp[1]+"-"+stringp[2]+"-"+stringp[3]);
+            butt.setAttribute("name", stringp[1]+"-"+stringp[2]+"-"+stringp[3]+"-"+tipo);
+
         };
         //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
         const inventario = [0, 10000, 10000];
@@ -119,39 +124,70 @@
             document.getElementById("acaoSh").setAttribute( "onClick", "baction();banum()" );
             document.getElementById("showR").style.display = "block";
         }
-        function ishow(img, bot) {
+        function ishowC(img, bot) {
             cam = 2;
-            var h = document.getElementById(`${img}`);
-            document.getElementById("showR").style.backgroundImage = 'url("'+h.src+'")';
+            //var h = document.getElementById(`${img.id}`);
+            console.log(img.id);
+            console.log(bot.id);
+            document.getElementById("showR").style.backgroundImage = 'url("'+img.src+'")';
             document.getElementById("acaoSh").innerHTML = "APRIMORAR";
-            document.getElementById("acaoSh").setAttribute( "onClick", `champC(${bot})` );
-            document.getElementById("showR").style.display = "block";
 
+            document.getElementById("acaoSh").setAttribute( "onClick", `champC(${bot.id}`+`,${img.id})` );
+            modo.style.display = "none";
+            document.getElementById("showR").style.display = "block";
         }
-        function champC(img){
+        function ishowV(img, bot) {
+            cam = 2;
+            //var h = document.getElementById(`${img.id}`);
+            console.log(img.id);
+            console.log(bot.id);
+            document.getElementById("showR").style.backgroundImage = 'url("'+img.src+'")';
+            document.getElementById("acaoSh").innerHTML = "DESENCANTAR";
+
+            document.getElementById("acaoSh").setAttribute( "onClick", `champV(${bot.id}`+`,${img.id})` );
+            modo.style.display = "none";
+            document.getElementById("showR").style.display = "block";
+        }
+        function champC(img, bot){
+            console.log(img);
+            console.log(bot);
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
             var custo = strina[1];
-            inventario[1] = inventario[1] - custo;
+            console.log(strina[1]);
+            if(strina[3]==="S"){
+                inventario[2] = inventario[2] - custo;
+            }else{
+                inventario[1] = inventario[1] - custo;
+            }
             esnum();
+            modadd(bot, img);
             img.remove();
             document.getElementById("showR").style.display = "none";
         }
-        function champV(img){
+        function champV(img, bot){
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
             var valor = strina[2];
-            inventario[1] = inventario[1] + +valor;
+            if(strina[3]==="S"){
+                inventario[2] = inventario[2] + +valor;
+            }else{
+                inventario[1] = inventario[1] + +valor;
+            }
             esnum();
+            modadd(bot, img);
             img.remove();
             document.getElementById("showR").style.display = "none";
         }
         function champClick(string){
+            modo.style.display = "block";
             var stringsp = string.split('-');
             var bot = stringsp[0];
             var img = stringsp[1];
-            ishow(img, bot);
+            document.getElementById("butap").setAttribute( "onClick", `ishowC(${img}`+`,${bot});`);
+            document.getElementById("butde").setAttribute( "onClick", `ishowV(${img}`+`,${bot})` );
         }
+
         //acao abrir bau
         function baction() {
             // aleatorio se receber mais de 2 itens
@@ -168,6 +204,7 @@
                         break;
                     case 1:
                         //champ
+                        var tipo = "C";
                         var item = rannum(10);
                         litem = litem + 1;
                         var id = item;
@@ -177,6 +214,7 @@
                         butt.style.margin = "2px";
                         butt.style.height = "50px";
                         butt.style.width = "50px";
+                        butt.className = "moldicon";
                         
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
@@ -200,15 +238,16 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem, butt));
+                            .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
-
+                        
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                     case 2:
                         //skin
+                        var tipo = "S";
                         var item = rannum(10);//+"S";
                         litem = litem + 1;
                         var id = item;
@@ -235,7 +274,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem, butt));
+                            .then((data) => crimg(data, imagem, butt, tipo));
                         butt.appendChild(imagem);
                         //adiciona botao ao div materiais
                         elem = document.getElementById("materiais");
@@ -254,6 +293,7 @@
                         break;
                     case 1:
                         //champ
+                        var tipo = "C";
                         var item = rannum(10);
                         litem = litem + 1;
                         var id = item;
@@ -281,14 +321,15 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem, butt));
+                            .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                     case 2:
-                        //skin 
+                        //skin
+                        var tipo = "S";
                         var item = rannum(10);//+"S";
                         litem = litem + 1;
                         var id = item;
@@ -317,7 +358,7 @@
                             .then((res) => {
                                 return res.json();
                             })
-                            .then((data) => crimg(data, imagem, butt));
+                            .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
@@ -359,7 +400,19 @@
         function rannum(numb) {
             return Math.floor(Math.random() * numb);
         }
-
+        function modadd(img, bot){
+            //console.log(img);
+            var struse = bot.getAttribute("name");
+            var strina = struse.split('-');
+            //nome skin
+            console.log(strina[0]);
+            console.log(strina[3]);
+            var imagem = document.createElement("img");
+            imagem.src = img.src
+            imagem.className = "colit";
+            elem = document.getElementById("colec");
+            elem.appendChild(imagem);
+        }
         //modal colecao
         var modal = document.getElementById("mymodal");
             var btnLog = document.getElementById("btncol");
@@ -370,15 +423,34 @@
                 modal.style.display = "block";
             }
             
-            // When the user clicks on <span> (x), close the modal
+            //fechar modal no X
             span.onclick = function() {
                 mymodal.style.display = "none";
             }
 
-            // When the user clicks anywhere outside of the modal, close it
+            // fechar modal se click fora da tela
             window.onclick = function(event) {
                 if (event.target == modal) {
-                modal.style.display = "none";
+                mymodal.style.display = "none";
+                }
+            }
+
+        //modal escolha desenc enc
+       
+            //var btnLog = document.getElementById("butt1");
+
+            //var span = document.getElementsByClassName("close")[0];
+            
+            
+            //fechar modal no X
+            /*span.onclick = function() {
+                mymodal.style.display = "none";
+            }*/
+
+            // fechar modal se click fora da tela
+            window.onclick = function(event) {
+                if (event.target == modo) {
+                modo.style.display = "none";
                 }
             }
 
