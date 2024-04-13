@@ -102,7 +102,7 @@
 
         };
         //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
-        const inventario = [0, 10000, 10000];
+        const inventario = [0, 0, 0];
         //valores da sessao
         document.getElementById("EAZ").innerHTML = inventario[1];
         document.getElementById("ELA").innerHTML = inventario[2];
@@ -175,15 +175,29 @@
                 inventario[1] = inventario[1] + +valor;
             }
             esnum();
-            modadd(bot, img);
+            //modadd(bot, img);
             img.remove();
             document.getElementById("showR").style.display = "none";
         }
         function champClick(string){
             modo.style.display = "block";
+            document.getElementById("butap").disabled = false;
             var stringsp = string.split('-');
             var bot = stringsp[0];
             var img = stringsp[1];
+            var bna = document.getElementById(bot).getAttribute("name").split('-');
+            var acc = 1;
+            if(bna[3]==="S"){
+                acc = inventario[2] - bna[1];
+                if(acc<0){
+                    document.getElementById("butap").disabled = true;
+            }
+            }else{
+                acc = inventario[1]  - bna[1];
+                if(acc<0){
+                    document.getElementById("butap").disabled = true;
+            }
+            }
             document.getElementById("butap").setAttribute( "onClick", `ishowC(${img}`+`,${bot});`);
             document.getElementById("butde").setAttribute( "onClick", `ishowV(${img}`+`,${bot})` );
         }
