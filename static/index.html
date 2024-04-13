@@ -9,12 +9,24 @@
 </head>
 
 <body>
+
+    <div id="mymodal" class="modal">
+        <div class="modalCont">
+            <span class="close">&times;</span>
+            <h2></h2>
+            <div id="colec">
+
+            </div>
+        </div>
+    </div>
+
     <div id="grandiv">
         <!-- div lado esquerdo (materiais, "index", 
         numeros de essencia laranja etc listados embaixo)-->
         <div id="leftsInMcseeeNums">
             <!-- index -->
             <div id="indL">
+                <button class="bin" id="btncol"><img src="/loot-league/static/imageAs/collmod.png" alt=""></button>
                 <button class="bin"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
                 <button class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" alt=""></button>
                 <button class="bin"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
@@ -139,7 +151,6 @@
             var bot = stringsp[0];
             var img = stringsp[1];
             ishow(img, bot);
-            //champC(bot);
         }
         //acao abrir bau
         function baction() {
@@ -153,12 +164,7 @@
                     case 0:
                         //caso recebeu bau
                         inventario[0] = inventario[0] + 1;
-                        /*document.getElementById("chaves").innerHTML = inventario[0];
-                        document.getElementById("baus").innerHTML = inventario[0];
-                        document.getElementById("baus1").innerHTML = inventario[0];
-                        */
                         receb = receb + 1;
-                        //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
                         //champ
@@ -181,7 +187,6 @@
                         //texto para o botao
                         text = document.createTextNode(item);
                         //adiciona texto ao botao
-                        ////butt.appendChild(text);
                         fetch('/img', {
                             method: 'POST',
                             headers: {
@@ -217,13 +222,6 @@
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
                         butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
-                        //criar imagem para mostrar campeao
-                        
-
-                        //texto para o botao
-                        //text = document.createTextNode(item);
-                        //adiciona texto ao botao
-                        //butt.appendChild(text);
                         fetch('/imgs', {
                             method: 'POST',
                             headers: {
@@ -252,11 +250,7 @@
                     case 0:
                         //caso recebeu bau
                         inventario[0] = inventario[0] + 1;
-                        /*document.getElementById("chaves").innerHTML = inventario[0];
-                        document.getElementById("baus").innerHTML = inventario[0];
-                        document.getElementById("baus1").innerHTML = inventario[0];*/
                         receb = receb + 1;
-                        //document.getElementById("baus1").innerHTML = "<span class='gtex'>(+1)</span>"+inventario[0];
                         break;
                     case 1:
                         //champ
@@ -274,10 +268,6 @@
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
                         butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
-                        //texto para o botao
-                        //text = document.createTextNode(item);
-                        //adiciona texto ao botao
-                        //butt.appendChild(text);
                         fetch('/img', {
                             method: 'POST',
                             headers: {
@@ -314,10 +304,6 @@
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
                         butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
-                        //texto para o botao
-                        //text = document.createTextNode(item);
-                        //adiciona texto ao botao
-                        //butt.appendChild(text);
                         fetch('/imgs', {
                             method: 'POST',
                             headers: {
@@ -340,8 +326,6 @@
                 }
             }
 
-            //final
-            //diminuir num de bau e chave do array de inventario **
 
         }
         function esnum(){
@@ -375,6 +359,29 @@
         function rannum(numb) {
             return Math.floor(Math.random() * numb);
         }
+
+        //modal colecao
+        var modal = document.getElementById("mymodal");
+            var btnLog = document.getElementById("btncol");
+
+            var span = document.getElementsByClassName("close")[0];
+            
+            btnLog.onclick = function(){
+                modal.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                mymodal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                modal.style.display = "none";
+                }
+            }
+
     </script>
 </body>
 
