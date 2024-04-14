@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div id="grandiv">
         <!-- div lado esquerdo (materiais, "index", 
@@ -89,8 +89,8 @@
             if (cam === 1) {
                 baction();
                 banum();
-            } else if(cam===2){
-                
+            } else if (cam === 2) {
+
             }
         }
         function crimg(data, num, butt, tipo) {
@@ -98,7 +98,7 @@
             var img = num;
             var stringp = data.split('-');
             img.src = "data:image/jpg;base64, " + stringp[0];
-            butt.setAttribute("name", stringp[1]+"-"+stringp[2]+"-"+stringp[3]+"-"+tipo);
+            butt.setAttribute("name", stringp[1] + "-" + stringp[2] + "-" + stringp[3] + "-" + tipo);
 
         };
         //inventario em array basico, i[1]=numero de baus|| i[2]=essencia azul||i[3]=essencia laranja
@@ -121,7 +121,7 @@
             document.getElementById("showR").style.backgroundImage = 'url("/loot-league/static/imageAs/hextec.png")';
             document.getElementById("acaoSh").innerHTML = "ABRIR";
             document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
-            document.getElementById("acaoSh").setAttribute( "onClick", "baction();banum()" );
+            document.getElementById("acaoSh").setAttribute("onClick", "baction();banum()");
             document.getElementById("showR").style.display = "block";
         }
         function ishowC(img, bot) {
@@ -129,10 +129,10 @@
             //var h = document.getElementById(`${img.id}`);
             console.log(img.id);
             console.log(bot.id);
-            document.getElementById("showR").style.backgroundImage = 'url("'+img.src+'")';
+            document.getElementById("showR").style.backgroundImage = 'url("' + img.src + '")';
             document.getElementById("acaoSh").innerHTML = "APRIMORAR";
 
-            document.getElementById("acaoSh").setAttribute( "onClick", `champC(${bot.id}`+`,${img.id})` );
+            document.getElementById("acaoSh").setAttribute("onClick", `champC(${bot.id}` + `,${img.id})`);
             modo.style.display = "none";
             document.getElementById("showR").style.display = "block";
         }
@@ -141,23 +141,23 @@
             //var h = document.getElementById(`${img.id}`);
             console.log(img.id);
             console.log(bot.id);
-            document.getElementById("showR").style.backgroundImage = 'url("'+img.src+'")';
+            document.getElementById("showR").style.backgroundImage = 'url("' + img.src + '")';
             document.getElementById("acaoSh").innerHTML = "DESENCANTAR";
 
-            document.getElementById("acaoSh").setAttribute( "onClick", `champV(${bot.id}`+`,${img.id})` );
+            document.getElementById("acaoSh").setAttribute("onClick", `champV(${bot.id}` + `,${img.id})`);
             modo.style.display = "none";
             document.getElementById("showR").style.display = "block";
         }
-        function champC(img, bot){
+        function champC(img, bot) {
             console.log(img);
             console.log(bot);
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
             var custo = strina[1];
             console.log(strina[1]);
-            if(strina[3]==="S"){
+            if (strina[3] === "S") {
                 inventario[2] = inventario[2] - custo;
-            }else{
+            } else {
                 inventario[1] = inventario[1] - custo;
             }
             esnum();
@@ -165,13 +165,13 @@
             img.remove();
             document.getElementById("showR").style.display = "none";
         }
-        function champV(img, bot){
+        function champV(img, bot) {
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
             var valor = strina[2];
-            if(strina[3]==="S"){
+            if (strina[3] === "S") {
                 inventario[2] = inventario[2] + +valor;
-            }else{
+            } else {
                 inventario[1] = inventario[1] + +valor;
             }
             esnum();
@@ -179,7 +179,8 @@
             img.remove();
             document.getElementById("showR").style.display = "none";
         }
-        function champClick(string){
+        //tirar o ishow de desencantar, so aumentar val no inventario e remover . . too tedious
+        function champClick(string) {
             modo.style.display = "block";
             document.getElementById("butap").disabled = false;
             var stringsp = string.split('-');
@@ -187,19 +188,19 @@
             var img = stringsp[1];
             var bna = document.getElementById(bot).getAttribute("name").split('-');
             var acc = 1;
-            if(bna[3]==="S"){
+            if (bna[3] === "S") {
                 acc = inventario[2] - bna[1];
-                if(acc<0){
+                if (acc < 0) {
                     document.getElementById("butap").disabled = true;
-            }
-            }else{
-                acc = inventario[1]  - bna[1];
-                if(acc<0){
+                }
+            } else {
+                acc = inventario[1] - bna[1];
+                if (acc < 0) {
                     document.getElementById("butap").disabled = true;
+                }
             }
-            }
-            document.getElementById("butap").setAttribute( "onClick", `ishowC(${img}`+`,${bot});`);
-            document.getElementById("butde").setAttribute( "onClick", `ishowV(${img}`+`,${bot})` );
+            document.getElementById("butap").setAttribute("onClick", `ishowC(${img}` + `,${bot});`);
+            document.getElementById("butde").setAttribute("onClick", `ishowV(${img}` + `,${bot})`);
         }
 
         //acao abrir bau
@@ -226,16 +227,16 @@
                         butt = document.createElement("button");
                         butt.style.border = "solid rgb(120, 90, 40)";
                         butt.style.margin = "2px";
-                        butt.style.height = "50px";
-                        butt.style.width = "50px";
+                        butt.style.height = "80px";
+                        butt.style.width = "80px";
                         butt.className = "moldicon";
-                        
+
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
                         butt.id = `butt${litem}`;
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
-                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
+                        butt.setAttribute("onClick", `champClick("butt${litem}` + "-" + `img${litem}");`);
                         //texto para o botao
                         text = document.createTextNode(item);
                         //adiciona texto ao botao
@@ -254,7 +255,7 @@
                             })
                             .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
-                        
+
                         butt.appendChild(imagem);
                         elem = document.getElementById("materiais");
                         elem.appendChild(butt);
@@ -268,13 +269,13 @@
                         butt = document.createElement("button");
                         butt.style.border = "solid rgb(120, 90, 40)";
                         butt.style.margin = "2px";
-                        butt.style.height = "50px";
-                        butt.style.width = "50px";
+                        butt.style.height = "80px";
+                        butt.style.width = "80px";
                         var imagem = document.createElement("img");
                         butt.id = `butt${litem}`;
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
-                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
+                        butt.setAttribute("onClick", `champClick("butt${litem}` + "-" + `img${litem}");`);
                         fetch('/imgs', {
                             method: 'POST',
                             headers: {
@@ -314,14 +315,14 @@
                         butt = document.createElement("button");
                         butt.style.border = "solid rgb(120, 90, 40)";
                         butt.style.margin = "2px";
-                        butt.style.height = "50px";
-                        butt.style.width = "50px";
+                        butt.style.height = "80px";
+                        butt.style.width = "80px";
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
                         butt.id = `butt${litem}`;
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
-                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
+                        butt.setAttribute("onClick", `champClick("butt${litem}` + "-" + `img${litem}");`);
                         fetch('/img', {
                             method: 'POST',
                             headers: {
@@ -350,15 +351,15 @@
                         butt = document.createElement("button");
                         butt.style.border = "solid rgb(120, 90, 40)";
                         butt.style.margin = "2px";
-                        butt.style.height = "50px";
-                        butt.style.width = "50px";
-                        
+                        butt.style.height = "80px";
+                        butt.style.width = "80px";
+
                         //criar imagem para mostrar campeao
                         var imagem = document.createElement("img");
                         butt.id = `butt${litem}`;
                         imagem.id = `img${litem}`;
                         imagem.className = "moldicon";
-                        butt.setAttribute( "onClick", `champClick("butt${litem}`+"-"+`img${litem}");` );
+                        butt.setAttribute("onClick", `champClick("butt${litem}` + "-" + `img${litem}");`);
                         fetch('/imgs', {
                             method: 'POST',
                             headers: {
@@ -383,7 +384,7 @@
 
 
         }
-        function esnum(){
+        function esnum() {
             document.getElementById("EAZ").innerHTML = inventario[1];
             document.getElementById("ELA").innerHTML = inventario[2];
         }
@@ -393,10 +394,10 @@
             //atualizar valores dos textos
             document.getElementById("chaves").innerHTML = inventario[0];
             document.getElementById("baus").innerHTML = inventario[0];
-            if(receb===0){
+            if (receb === 0) {
                 document.getElementById("baus1").innerHTML = inventario[0];
-            }else{
-                document.getElementById("baus1").innerHTML = "<span class='gtex'>(+"+receb+")</span>"+inventario[0];
+            } else {
+                document.getElementById("baus1").innerHTML = "<span class='gtex'>(+" + receb + ")</span>" + inventario[0];
                 receb = 0;
             }
             //hide menu acao bau
@@ -414,7 +415,7 @@
         function rannum(numb) {
             return Math.floor(Math.random() * numb);
         }
-        function modadd(img, bot){
+        function modadd(img, bot) {
             //console.log(img);
             var struse = bot.getAttribute("name");
             var strina = struse.split('-');
@@ -429,44 +430,31 @@
         }
         //modal colecao
         var modal = document.getElementById("mymodal");
-            var btnLog = document.getElementById("btncol");
+        var btnLog = document.getElementById("btncol");
 
-            var span = document.getElementsByClassName("close")[0];
-            
-            btnLog.onclick = function(){
-                modal.style.display = "block";
-            }
-            
-            //fechar modal no X
-            span.onclick = function() {
+        var span = document.getElementsByClassName("close")[0];
+
+        btnLog.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        //fechar modal no X
+        span.onclick = function () {
+            mymodal.style.display = "none";
+        }
+
+        // fechar modal se click fora da tela
+        window.onclick = function (event) {
+            if (event.target == modal) {
                 mymodal.style.display = "none";
             }
-
-            // fechar modal se click fora da tela
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                mymodal.style.display = "none";
-                }
-            }
-
-        //modal escolha desenc enc
-       
-            //var btnLog = document.getElementById("butt1");
-
-            //var span = document.getElementsByClassName("close")[0];
-            
-            
-            //fechar modal no X
-            /*span.onclick = function() {
-                mymodal.style.display = "none";
-            }*/
-
-            // fechar modal se click fora da tela
-            window.onclick = function(event) {
-                if (event.target == modo) {
+        }
+        // fechar modal se click fora da tela
+        window.onclick = function (event) {
+            if (event.target == modo) {
                 modo.style.display = "none";
-                }
             }
+        }
 
     </script>
 </body>

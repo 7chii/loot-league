@@ -1,179 +1,205 @@
-*{
-    overflow:auto;
-    background-color: rgb(0, 18, 33);
-    color:rgb(160, 155, 140);
-    padding: 0px;
+* {
+  overflow: auto;
+  background-color: rgb(0, 18, 33);
+  color: rgb(160, 155, 140);
+  padding: 0px;
 }
-body, html{
+
+body,
+html {
   height: fit-content;
   width: 100%;
   overflow: hidden;
 }
-#grandiv{
-    width:100%;
-    height: 100%;
-    overflow:hidden;
-}
-#leftsInMcseeeNums{
-  display:inline-block;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    width:40%;
-    overflow: hidden;
-    }
-    #indL{
-        padding: 0;
-        margin:0;
-        float: left;
-        overflow: hidden;
-        box-sizing: border-box;
-        color:aliceblue;
-        font-size: 500%;
-        height: 100%;
-        width: 10%;
-        background-color: rgb(0, 18, 33);
-    }
-    .org{
-        display: flex;
-        vertical-align: top;
-        padding: 0%;
-        border: hidden;
-    }
-    .bin{
-        display: flex;
-        vertical-align: top;
-        padding: 0%;
-        border: hidden;
-    }
-    .bin + .bin{
-        margin-top:30px
-    }
-    #mcseeeNnums{
-        margin:0;
-        padding:0;
-        overflow: hidden;
-        float: right;
-        height: 100%;
-        width:88%;
-        border-right:6px solid;
-        border-color: rgb(120, 90, 40);
-    }
-    #mcseee{
-        display: flex;
-        position: fixed;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        overflow: visible;
-        margin:0;
-        color: aliceblue;
-        
-        background-color: rgb(0, 18, 33);
-        padding-top:0px;
-        margin: 0px;
-        height: 10%;
-        width:30%;
-    }
-    #materiais{
-      overflow: hidden;
-        width: 30%;
-        height: 100%;
-        display: inline-block;
-        position: fixed;
-        margin-top: 5%;
-        hr{
-            border-color:rgb(120, 90, 40);
-        }
-    }
-    #sbme{
-        margin-top: 6%;
-        height: 25px;
-        background-color: rgb(0, 5, 11);
-        border-color: rgb(120, 90, 40);
-        border-style:solid;
-        border-width: 1px;
-    }
-    #baus1{
-        height: 50px;
-        width: 50px;
-        display: flex;
-        align-items: flex-end;
-        justify-content:flex-end;
-        background-image: url("/loot-league/static/imageAs/hextec.png");
-        background-size: contain;
-        display: none;
-        margin:2px;
-        border-style: solid;
-        border-color: rgb(120, 90, 40);
 
-        
-    }
-    .rtex{
-        color:red;
-    }
-    .gtex{
-        color:greenyellow;
-        animation-name: gtexto;
-	    animation-duration: 2s;
-	    animation-iteration-count: 1;
-	    animation-timing-function: linear;
-	    animation-fill-mode: forwards;
-        
-    }
-    @keyframes gtexto {
-        0%{
-            opacity: 0;
-            display:flex;
-        }
-        25%{
-            opacity: 1;
-        }
-        50%{
-            opacity: 1;
-        }
-        75%{
-            opacity: 0;
-        }
-        100%{
-            opacity: 0;
-            display:none;
-        }
-    }
-    #nums{
-      position: fixed;
-        box-sizing: border-box;
-        /* trocar border por um coisinho de scroll (pra quem for fazer)*/
-        border-top: 6px solid;
-        border-color: rgb(120, 90, 40);
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
-        bottom: 0;
-        background-color: rgb(0, 18, 33);
-        color: aliceblue;
-        height: 12vh;
-        width: 50%;
-    }
-.info + .info{
-    margin-left: 10px;
+#grandiv {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
-#rights{
-  display:inline-block;
-  position:fixed;
-    overflow: hidden;
-    box-sizing: border-box;
-    background-color:rgb(0, 18, 33);
-    height: 100%;
-    width:50%;
-    h1{
-        color:aliceblue;
-    }
+
+#leftsInMcseeeNums {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  width: 40%;
+  overflow: hidden;
 }
-#showR{
-    overflow: hidden;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto;
+
+#indL {
+  padding: 0;
+  margin: 0;
+  float: left;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: aliceblue;
+  font-size: 500%;
+  height: 100%;
+  width: 10%;
+  background-color: rgb(0, 18, 33);
+}
+
+.org {
+  display: flex;
+  vertical-align: top;
+  padding: 0%;
+  border: hidden;
+}
+
+.bin {
+  display: flex;
+  vertical-align: top;
+  padding: 0%;
+  border: hidden;
+}
+
+.bin+.bin {
+  margin-top: 30px
+}
+
+#mcseeeNnums {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  float: right;
+  height: 100%;
+  width: 88%;
+  border-right: 6px solid;
+  border-color: rgb(120, 90, 40);
+}
+
+#mcseee {
+  display: flex;
+  position: fixed;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+   overflow: visible;
+  margin: 0;
+  color: aliceblue;
+
+  background-color: rgb(0, 18, 33);
+  padding-top: 0px;
+  margin: 0px;
+  height: 10%;
+  width: 30%;
+}
+
+#materiais {
+  overflow: visible;
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  position: fixed;
+  margin-top: 5%;
+
+  hr {
+    border-color: rgb(120, 90, 40);
+  }
+}
+
+#sbme {
+  margin-top: 6%;
+  height: 25px;
+  background-color: rgb(0, 5, 11);
+  border-color: rgb(120, 90, 40);
+  border-style: solid;
+  border-width: 1px;
+}
+
+#baus1 {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background-image: url("/loot-league/static/imageAs/hextec.png");
+  background-size: contain;
+  display: none;
+  margin: 2px;
+  border-style: solid;
+  border-color: rgb(120, 90, 40);
+
+
+}
+
+.rtex {
+  color: red;
+}
+
+.gtex {
+  color: greenyellow;
+  animation-name: gtexto;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes gtexto {
+  0% {
+    opacity: 0;
+    display: flex;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+#nums {
+  position: fixed;
+  box-sizing: border-box;
+  /* trocar border por um coisinho de scroll (pra quem for fazer)*/
+  border-top: 6px solid;
+  border-color: rgb(120, 90, 40);
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  bottom: 0;
+  background-color: rgb(0, 18, 33);
+  color: aliceblue;
+  height: 12vh;
+  width: 50%;
+}
+
+.info+.info {
+  margin-left: 10px;
+}
+
+#rights {
+  display: inline-block;
+  position: fixed;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: rgb(0, 18, 33);
+  height: 100%;
+  width: 50%;
+
+  h1 {
+    color: aliceblue;
+  }
+}
+
+#showR {
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -182,135 +208,171 @@ body, html{
   align-items: flex-end;
   text-align: center;
 }
-.moldicon{
-    align-self: center;
-    height: 100%;
-    width: 100%;
-    overflow:hidden;
+
+.moldicon {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
-button{
-  overflow:hidden;
+
+button {
+  overflow: hidden;
 }
-#acaoSh{
-    position:absolute;
-    margin-bottom: 15%;
-    margin-right: 15%;
-    bottom: 0;
-    right:3;
+
+#acaoSh {
+  position: absolute;
+  margin-bottom: 15%;
+  margin-right: 15%;
+  bottom: 0;
+  right: 3;
 }
 
 
 /* MODAL COLECAO */
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 25px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow:auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  /* itens modal colecao */
-  .colit{
-    width: 150px;
-    height: 300px;
-    object-fit: cover;
-  }
-  .colit + .colit{
-    margin-left: 5px;
-  }
-  /* Modal Content */
-  .modalCont {
-    overflow: auto;
-    background-color: rgb(0, 18, 33);
-    margin: auto;
-    padding: 20px;
-    border: 1px solid rgb(120, 90, 40);
-    width: 620px;
-    height: 520px;
-  }
-  
-  /* Botao de fechar */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .modol {
-    display: none; /* Hidden by default */
-    position: absolute; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 25%; /* Location of the box */
-    padding-right: 40%;
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow:hidden; /* Enable scroll if needed */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 25px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
 
-    background-color: rgba(0,0,0,0.0); /* Black w/ opacity */
-  }
-    /* Modal Content */
-    .choicecont {
-      overflow: auto;
-      background-color: rgb(0, 18, 33);
-      margin-top: 0;
-      margin-left: 15%;
-      padding: 20px;
-      border: 1px solid rgb(120, 90, 40);
-      width: 10%;
-      height: 10%;
-    }
-   /*/* drop down de organizacao do lado da searchbar*/
-   .orgbutt{
-    overflow: hidden;
-    background-color: rgb(15,28,40);
-    margin-left: 3%;
-    margin-top: 25%;
+/* itens modal colecao */
+.colit {
+  width: 150px;
+  height: 300px;
+  object-fit: cover;
 }
-.drop-orgbutt{
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: relative;
-    display: inline-block;
-    height:70px;
-    padding-bottom: 0px;
+
+.colit+.colit {
+  margin-left: 5px;
 }
-.orgbutt-content{
-display: none;
-position:absolute;
-min-width: 50px;
-z-index: 10000;
+
+/* Modal Content */
+.modalCont {
+  overflow: auto;
+  background-color: rgb(0, 18, 33);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid rgb(120, 90, 40);
+  width: 620px;
+  height: 520px;
 }
-.drop-orgbutt:hover .orgbutt-content{display:block;}
-.drop-orgbutt:hover .orgbutt{background-color: rgb(15, 27, 36);}
+
+/* Botao de fechar */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modol {
+  display: none;
+  /* Hidden by default */
+  position: absolute;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 25%;
+  /* Location of the box */
+  padding-right: 40%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+
+  background-color: rgba(0, 0, 0, 0.0);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.choicecont {
+  overflow: auto;
+  background-color: rgb(0, 18, 33);
+  margin-top: 0;
+  margin-left: 15%;
+  padding: 20px;
+  border: 1px solid rgb(120, 90, 40);
+  width: 10%;
+  height: 10%;
+}
+
+/*/* drop down de organizacao do lado da searchbar*/
+.orgbutt {
+  overflow: hidden;
+  background-color: rgb(15, 28, 40);
+  margin-left: 3%;
+  margin-top: 25%;
+}
+
+.drop-orgbutt {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: inline-block;
+  height: 70px;
+  padding-bottom: 0px;
+}
+
+.orgbutt-content {
+  display: none;
+  position: absolute;
+  min-width: 50px;
+  z-index: 10000;
+}
+
+.drop-orgbutt:hover .orgbutt-content {
+  display: block;
+}
+
+.drop-orgbutt:hover .orgbutt {
+  background-color: rgb(15, 27, 36);
+}
+
 /*scrollbar*/
-.scrollb{
-      ::-webkit-scrollbar {
-        width: 7px;
-        height: inherit;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: rgb(120, 90, 40);
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-track {
-        background: none;
-        border-radius: 5px;
-      }
-}
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: inherit;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(120, 90, 40);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 5px;
+  }
+
 
 /*scrollbar end*/
