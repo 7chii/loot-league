@@ -49,6 +49,10 @@ app.get('/loot-league/static/imageAs/skinsin.png', (req, res) => {
     res.set('content-type', 'image/png');
     res.sendFile(path.join(__dirname, 'static/imageAs/skinsin.png'));
 })
+app.get('/loot-league/static/imageAs/collmod.png', (req, res) => {
+    res.set('content-type', 'image/png');
+    res.sendFile(path.join(__dirname, 'static/imageAs/collmod.png'));
+})
 //post request de info de ID campeao, recebendo string em buffer->b64->jpg e servindo pro front:
 app.post('/img', (req, res) => {
     const { id } = req.body;
@@ -64,13 +68,6 @@ app.post('/img', (req, res) => {
         var string = dat.toString('base64');
         var partS = string.split('jpegbase64');
         res.send(`"${partS[1]}-${datn}-${datc}-${datv}"`);
-        /*if (err) throw err;
-        const dat = Buffer.from(result[0].splash);
-        var string = dat.toString('base64');
-        var partS = string.split('jpegbase64');
-        res.send(`"${partS[1]}"`);
-        console.log(partS[0]+` ${id}`);
-        console.log("fim packt");*/
     })
 });
 app.post('/imgs', (req, res) => {
