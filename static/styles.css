@@ -74,7 +74,7 @@ html {
   position: fixed;
   flex-wrap: wrap;
   box-sizing: border-box;
-   overflow: visible;
+   overflow: auto;
   margin: 0;
   color: aliceblue;
 
@@ -86,7 +86,7 @@ html {
 }
 
 #materiais {
-  overflow: visible;
+  overflow: auto;
   width: 30%;
   height: 100%;
   display: inline-block;

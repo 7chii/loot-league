@@ -44,9 +44,9 @@
                 <div id="mcseee" class="scrollb">
                     <input type="text" placeholder="Buscar" id="sbme">
                     <div class="drop-orgbutt">
-                        <button class="orgbutt">Alfabetico</button>
+                        <button class="orgbutt" id="orgbshow">org</button>
                         <div class="orgbutt-content">
-                            <button class="org" onclick="">Alfabetico</button>
+                            <button class="org" onclick="abcorg()" id="orgbabc">Alfabetico</button>
                             <button class="org" onclick="">Valor</button>
                             <button class="org" onclick="">Campeao</button>
                             <button class="org" onclick="">Skin</button>
@@ -384,6 +384,82 @@
 
 
         }
+        //funcs de organizacao
+        function abcorg() {
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            document.getElementById("orgbshow").innerHTML = document.getElementById("orgbabc").innerHTML;
+            let ordo = [];
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+
+            var ordok = [];
+            for (var i = 0; i < ordo.length; i++) {
+                ordok[i] = ordo[i];
+            }
+            ordo.sort();
+            console.log(ordo);
+            console.log(ordok);
+            let h = [];
+            chilelem = chilelem - 1;
+            for (var i = 0; i < chilelem; i++) {
+                //var div = document.getElementById("materiais");
+                //console.log(ordo[i]);
+                var ele = ordo[i];
+
+                //pegar ele inicial lista nao ordenada V
+                //passar ele inical para ele hold V
+                //passar ele hold para posicao da lista ordenada
+
+                //bot = document.getElementsByName(`${ordok[i]}`);
+                //var bot = document.querySelector(`[name='${ordok[i]}']`);
+
+                var bot = document.getElementsByName(`${ele}`)[0];
+                var fu = bot.getAttribute("onclick");
+                console.log(fu);
+                //botao nao appendado pra segurar info
+                //var atn = bot.getAttribute("name");
+                var hold = document.createElement("button");
+
+                hold.id = bot.id
+                hold.setAttribute("name", `${ele}`);
+                hold.setAttribute("onclick",`${fu}`);
+
+                var imghold = document.createElement("img");
+                //pegar child img dentro do botao 
+                var imgarr = Array.from(bot.children);
+                var imgarrs = imgarr[0];
+
+                imghold.src = imgarrs.src;
+                imghold.id = imgarrs.id;
+                imghold.className = imgarrs.className;
+                hold.appendChild(imghold);
+                h[i] = hold;
+                console.log(h[i]);
+                bot.remove();
+            };
+            for (var i = 0; i < chilelem; i++) {
+                var div = document.getElementById("materiais");
+                //passar info para primeiro botao
+                var hold = h[i];
+                //console.log(hold.id);
+                butt = document.createElement("button");
+                butt = hold;
+                butt.style.border = "solid rgb(120, 90, 40)";
+                butt.style.margin = "2px";
+                butt.style.height = "80px";
+                butt.style.width = "80px";
+                
+                div.appendChild(butt);
+            }
+        }
+        //end funcs de org
         function esnum() {
             document.getElementById("EAZ").innerHTML = inventario[1];
             document.getElementById("ELA").innerHTML = inventario[2];
