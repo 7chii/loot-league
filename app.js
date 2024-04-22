@@ -37,10 +37,6 @@ app.get('/loot-league/static/imageAs/allin.png', (req, res) => {
     res.set('content-type', 'image/css');
     res.sendFile(path.join(__dirname, 'static/imageAs/allin.png'));
 })
-app.get('/loot-league/static/imageAs/bauIndl.png', (req, res) => {
-    res.set('content-type', 'image/png');
-    res.sendFile(path.join(__dirname, 'static/imageAs/hexin.png'));
-})
 app.get('/loot-league/static/imageAs/campin.png', (req, res) => {
     res.set('content-type', 'image/png');
     res.sendFile(path.join(__dirname, 'static/imageAs/campin.png'));

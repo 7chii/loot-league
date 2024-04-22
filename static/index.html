@@ -33,10 +33,9 @@
             <!-- index -->
             <div id="indL">
                 <button class="bin" id="btncol"><img src="/loot-league/static/imageAs/collmod.png" alt=""></button>
-                <button class="bin"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
-                <button class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" alt=""></button>
-                <button class="bin"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
-                <button class="bin"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
+                <button class="bin" onclick="orgall()"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
+                <button class="bin" onclick="orgchamp()"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
+                <button class="bin" onclick="orgskin()"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
             </div>
             <!-- materiais etc  e numeros + botao add bau embaixo -->
             <div id="mcseeeNnums">
@@ -47,9 +46,8 @@
                         <button class="orgbutt" id="orgbshow">org</button>
                         <div class="orgbutt-content">
                             <button class="org" onclick="abcorg()" id="orgbabc">Alfabetico</button>
-                            <button class="org" onclick="">Valor</button>
-                            <button class="org" onclick="">Campeao</button>
-                            <button class="org" onclick="">Skin</button>
+                            <button class="org" onclick="valorg()" id="orgval">Valor</button>
+                            <button class="org" onclick="cusorg()" id="orgcus">Custo</button>
                         </div>
                     </div>
                     <div id="materiais">
@@ -385,46 +383,35 @@
 
         }
         //funcs de organizacao
+        //org alfabetica
         function abcorg() {
             var chilelem = document.getElementById("materiais").children.length - 2;
             document.getElementById("orgbshow").innerHTML = document.getElementById("orgbabc").innerHTML;
             let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
                 var A = document.getElementById(`butt${i}`);
                 var str = A.getAttribute("name");
                 ordo[i] = str;
             }
-
+            //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-
+            //ordem original pre-sort
             var ordok = [];
             for (var i = 0; i < ordo.length; i++) {
                 ordok[i] = ordo[i];
             }
             ordo.sort();
-            console.log(ordo);
-            console.log(ordok);
+            //lista de botoes
             let h = [];
             chilelem = chilelem - 1;
+            //for loop pegando botoes, arrumando ordem e appendando em array organizado
             for (var i = 0; i < chilelem; i++) {
-                //var div = document.getElementById("materiais");
-                //console.log(ordo[i]);
                 var ele = ordo[i];
-
-                //pegar ele inicial lista nao ordenada V
-                //passar ele inical para ele hold V
-                //passar ele hold para posicao da lista ordenada
-
-                //bot = document.getElementsByName(`${ordok[i]}`);
-                //var bot = document.querySelector(`[name='${ordok[i]}']`);
-
                 var bot = document.getElementsByName(`${ele}`)[0];
                 var fu = bot.getAttribute("onclick");
-                console.log(fu);
-                //botao nao appendado pra segurar info
-                //var atn = bot.getAttribute("name");
                 var hold = document.createElement("button");
 
                 hold.id = bot.id
@@ -441,9 +428,9 @@
                 imghold.className = imgarrs.className;
                 hold.appendChild(imghold);
                 h[i] = hold;
-                console.log(h[i]);
                 bot.remove();
             };
+            //passar array de botoes organizados para materiais(entao vazio)
             for (var i = 0; i < chilelem; i++) {
                 var div = document.getElementById("materiais");
                 //passar info para primeiro botao
@@ -457,6 +444,213 @@
                 butt.style.width = "80px";
                 
                 div.appendChild(butt);
+            }
+        }
+        //org valor
+        function cusorg(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            document.getElementById("orgbshow").innerHTML = document.getElementById("orgcus").innerHTML;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            var ordok = [];
+            for (var i = 0; i < ordo.length; i++) {
+                ordok[i] = ordo[i];
+            }
+            ordo.sort(function(a,b){return a.split('-')[2] - b.split('-')[2]});
+            console.log(ordo);
+            console.log(ordok);
+            //lista de botoes
+            let h = [];
+            chilelem = chilelem - 1;
+            //for loop pegando botoes, arrumando ordem e appendando em array organizado
+            for (var i = 0; i < chilelem; i++) {
+                var ele = ordo[i];
+                var bot = document.getElementsByName(`${ele}`)[0];
+                var fu = bot.getAttribute("onclick");
+                var hold = document.createElement("button");
+
+                hold.id = bot.id
+                hold.setAttribute("name", `${ele}`);
+                hold.setAttribute("onclick",`${fu}`);
+
+                var imghold = document.createElement("img");
+                //pegar child img dentro do botao 
+                var imgarr = Array.from(bot.children);
+                var imgarrs = imgarr[0];
+
+                imghold.src = imgarrs.src;
+                imghold.id = imgarrs.id;
+                imghold.className = imgarrs.className;
+                hold.appendChild(imghold);
+                h[i] = hold;
+                bot.remove();
+            };
+            //passar array de botoes organizados para materiais(entao vazio)
+            for (var i = 0; i < chilelem; i++) {
+                var div = document.getElementById("materiais");
+                //passar info para primeiro botao
+                var hold = h[i];
+                //console.log(hold.id);
+                butt = document.createElement("button");
+                butt = hold;
+                butt.style.border = "solid rgb(120, 90, 40)";
+                butt.style.margin = "2px";
+                butt.style.height = "80px";
+                butt.style.width = "80px";
+                
+                div.appendChild(butt);
+            }
+        }
+        //func org valor
+        function valorg(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            var ordok = [];
+            for (var i = 0; i < ordo.length; i++) {
+                ordok[i] = ordo[i];
+            }
+            ordo.sort(function(a,b){return a.split('-')[1] - b.split('-')[1]});
+            console.log(ordo);
+            console.log(ordok);
+            //lista de botoes
+            let h = [];
+            chilelem = chilelem - 1;
+            //for loop pegando botoes, arrumando ordem e appendando em array organizado
+            for (var i = 0; i < chilelem; i++) {
+                var ele = ordo[i];
+                var bot = document.getElementsByName(`${ele}`)[0];
+                var fu = bot.getAttribute("onclick");
+                var hold = document.createElement("button");
+
+                hold.id = bot.id
+                hold.setAttribute("name", `${ele}`);
+                hold.setAttribute("onclick",`${fu}`);
+
+                var imghold = document.createElement("img");
+                //pegar child img dentro do botao 
+                var imgarr = Array.from(bot.children);
+                var imgarrs = imgarr[0];
+
+                imghold.src = imgarrs.src;
+                imghold.id = imgarrs.id;
+                imghold.className = imgarrs.className;
+                hold.appendChild(imghold);
+                h[i] = hold;
+                bot.remove();
+            };
+            //passar array de botoes organizados para materiais(entao vazio)
+            for (var i = 0; i < chilelem; i++) {
+                var div = document.getElementById("materiais");
+                //passar info para primeiro botao
+                var hold = h[i];
+                //console.log(hold.id);
+                butt = document.createElement("button");
+                butt = hold;
+                butt.style.border = "solid rgb(120, 90, 40)";
+                butt.style.margin = "2px";
+                butt.style.height = "80px";
+                butt.style.width = "80px";
+                
+                div.appendChild(butt);
+            }
+        }
+        //org apenas skin
+        function orgskin(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            for(var i =0; i<ordo.length;i++){
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                dispy(elem,num);
+                if(ordo[i].split('-')[3]==="C"){
+                    dispn(elem, num);
+                }
+            }
+        }
+        //org apenas champ
+        function orgchamp(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            for(var i =0; i<ordo.length;i++){
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                dispy(elem,num);
+                if(ordo[i].split('-')[3]==="S"){
+                    dispn(elem, num);
+                }
+            }
+        }
+        function dispn(elem, num){
+            for(var i=0; i<num;i++){
+                        elem[i].style.display = "none";
+                    };
+        }
+        function dispy(elem, num){
+            for(var i=0; i<num;i++){
+                        elem[i].style.display = "inline-block";
+                    };
+        }
+        //func org mostrar tudo
+        function orgall(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            for(var i =0; i<ordo.length;i++){
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                dispy(elem,num);
             }
         }
         //end funcs de org
