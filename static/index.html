@@ -34,8 +34,10 @@
             <div id="indL">
                 <button class="bin" id="btncol"><img src="/loot-league/static/imageAs/collmod.png" alt=""></button>
                 <button class="bin" onclick="orgall()"><img src="/loot-league/static/imageAs/allin.png" alt=""></button>
-                <button class="bin" onclick="orgchamp()"><img src="/loot-league/static/imageAs/campin.png" alt=""></button>
-                <button class="bin" onclick="orgskin()"><img src="/loot-league/static/imageAs/skinsin.png" alt=""></button>
+                <button class="bin" onclick="orgchamp()"><img src="/loot-league/static/imageAs/campin.png"
+                        alt=""></button>
+                <button class="bin" onclick="orgskin()"><img src="/loot-league/static/imageAs/skinsin.png"
+                        alt=""></button>
             </div>
             <!-- materiais etc  e numeros + botao add bau embaixo -->
             <div id="mcseeeNnums">
@@ -73,7 +75,17 @@
         onde o campeao aparece antes de ir pra esquerda etc etc -->
         <div id="rights">
             <div id="showR">
-                <button type="button" onclick="bacao()" id="acaoSh">acao</button>
+                <div id='loading'>
+                    <div class='hold left'>
+                      <div class='fill'></div>
+                      <div class='cut'></div>
+                    </div>
+                    <div class='hold right'>
+                      <div class='cut'></div>
+                      <div class='fill'></div>
+                    </div>
+                  </div>
+                  <button type="button" onclick="bacao()" id="acaoSh">acao</button>
             </div>
         </div>
     </div>
@@ -121,6 +133,7 @@
             document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
             document.getElementById("acaoSh").setAttribute("onClick", "baction();banum()");
             document.getElementById("showR").style.display = "block";
+            document.getElementById("loading").style.display = "none";
         }
         function ishowC(img, bot) {
             cam = 2;
@@ -133,18 +146,7 @@
             document.getElementById("acaoSh").setAttribute("onClick", `champC(${bot.id}` + `,${img.id})`);
             modo.style.display = "none";
             document.getElementById("showR").style.display = "block";
-        }
-        function ishowV(img, bot) {
-            cam = 2;
-            //var h = document.getElementById(`${img.id}`);
-            console.log(img.id);
-            console.log(bot.id);
-            document.getElementById("showR").style.backgroundImage = 'url("' + img.src + '")';
-            document.getElementById("acaoSh").innerHTML = "DESENCANTAR";
-
-            document.getElementById("acaoSh").setAttribute("onClick", `champV(${bot.id}` + `,${img.id})`);
-            modo.style.display = "none";
-            document.getElementById("showR").style.display = "block";
+            document.getElementById("loading").style.display = "block";
         }
         function champC(img, bot) {
             console.log(img);
@@ -175,7 +177,7 @@
             esnum();
             //modadd(bot, img);
             img.remove();
-            document.getElementById("showR").style.display = "none";
+            modo.style.display = "none";
         }
         //tirar o ishow de desencantar, so aumentar val no inventario e remover . . too tedious
         function champClick(string) {
@@ -197,8 +199,10 @@
                     document.getElementById("butap").disabled = true;
                 }
             }
+            //aprim
             document.getElementById("butap").setAttribute("onClick", `ishowC(${img}` + `,${bot});`);
-            document.getElementById("butde").setAttribute("onClick", `ishowV(${img}` + `,${bot})`);
+            //desenc
+            document.getElementById("butde").setAttribute("onClick", `champV(${bot}` + `,${img})`);
         }
 
         //acao abrir bau
@@ -416,7 +420,7 @@
 
                 hold.id = bot.id
                 hold.setAttribute("name", `${ele}`);
-                hold.setAttribute("onclick",`${fu}`);
+                hold.setAttribute("onclick", `${fu}`);
 
                 var imghold = document.createElement("img");
                 //pegar child img dentro do botao 
@@ -442,12 +446,12 @@
                 butt.style.margin = "2px";
                 butt.style.height = "80px";
                 butt.style.width = "80px";
-                
+
                 div.appendChild(butt);
             }
         }
         //org valor
-        function cusorg(){
+        function cusorg() {
             var chilelem = document.getElementById("materiais").children.length - 2;
             document.getElementById("orgbshow").innerHTML = document.getElementById("orgcus").innerHTML;
             let ordo = [];
@@ -465,7 +469,7 @@
             for (var i = 0; i < ordo.length; i++) {
                 ordok[i] = ordo[i];
             }
-            ordo.sort(function(a,b){return a.split('-')[2] - b.split('-')[2]});
+            ordo.sort(function (a, b) { return a.split('-')[2] - b.split('-')[2] });
             console.log(ordo);
             console.log(ordok);
             //lista de botoes
@@ -480,7 +484,7 @@
 
                 hold.id = bot.id
                 hold.setAttribute("name", `${ele}`);
-                hold.setAttribute("onclick",`${fu}`);
+                hold.setAttribute("onclick", `${fu}`);
 
                 var imghold = document.createElement("img");
                 //pegar child img dentro do botao 
@@ -506,12 +510,12 @@
                 butt.style.margin = "2px";
                 butt.style.height = "80px";
                 butt.style.width = "80px";
-                
+
                 div.appendChild(butt);
             }
         }
         //func org valor
-        function valorg(){
+        function valorg() {
             var chilelem = document.getElementById("materiais").children.length - 2;
             document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
             let ordo = [];
@@ -529,7 +533,7 @@
             for (var i = 0; i < ordo.length; i++) {
                 ordok[i] = ordo[i];
             }
-            ordo.sort(function(a,b){return a.split('-')[1] - b.split('-')[1]});
+            ordo.sort(function (a, b) { return a.split('-')[1] - b.split('-')[1] });
             console.log(ordo);
             console.log(ordok);
             //lista de botoes
@@ -544,7 +548,7 @@
 
                 hold.id = bot.id
                 hold.setAttribute("name", `${ele}`);
-                hold.setAttribute("onclick",`${fu}`);
+                hold.setAttribute("onclick", `${fu}`);
 
                 var imghold = document.createElement("img");
                 //pegar child img dentro do botao 
@@ -570,12 +574,12 @@
                 butt.style.margin = "2px";
                 butt.style.height = "80px";
                 butt.style.width = "80px";
-                
+
                 div.appendChild(butt);
             }
         }
         //org apenas skin
-        function orgskin(){
+        function orgskin() {
             var chilelem = document.getElementById("materiais").children.length - 2;
             //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
             let ordo = [];
@@ -589,17 +593,17 @@
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            for(var i =0; i<ordo.length;i++){
+            for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
                 var num = elem.length;
-                dispy(elem,num);
-                if(ordo[i].split('-')[3]==="C"){
+                dispy(elem, num);
+                if (ordo[i].split('-')[3] === "C") {
                     dispn(elem, num);
                 }
             }
         }
         //org apenas champ
-        function orgchamp(){
+        function orgchamp() {
             var chilelem = document.getElementById("materiais").children.length - 2;
             //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
             let ordo = [];
@@ -613,29 +617,28 @@
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            for(var i =0; i<ordo.length;i++){
+            for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
                 var num = elem.length;
-                dispy(elem,num);
-                if(ordo[i].split('-')[3]==="S"){
+                dispy(elem, num);
+                if (ordo[i].split('-')[3] === "S") {
                     dispn(elem, num);
                 }
             }
         }
-        function dispn(elem, num){
-            for(var i=0; i<num;i++){
-                        elem[i].style.display = "none";
-                    };
+        function dispn(elem, num) {
+            for (var i = 0; i < num; i++) {
+                elem[i].style.display = "none";
+            };
         }
-        function dispy(elem, num){
-            for(var i=0; i<num;i++){
-                        elem[i].style.display = "inline-block";
-                    };
+        function dispy(elem, num) {
+            for (var i = 0; i < num; i++) {
+                elem[i].style.display = "inline-block";
+            };
         }
         //func org mostrar tudo
-        function orgall(){
+        function orgall() {
             var chilelem = document.getElementById("materiais").children.length - 2;
-            //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
@@ -647,10 +650,10 @@
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            for(var i =0; i<ordo.length;i++){
+            for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
                 var num = elem.length;
-                dispy(elem,num);
+                dispy(elem, num);
             }
         }
         //end funcs de org
@@ -686,7 +689,6 @@
             return Math.floor(Math.random() * numb);
         }
         function modadd(img, bot) {
-            //console.log(img);
             var struse = bot.getAttribute("name");
             var strina = struse.split('-');
             //nome skin
