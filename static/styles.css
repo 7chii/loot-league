@@ -4,7 +4,6 @@
   color: rgb(160, 155, 140);
   padding: 0px;
 }
-
 body,
 html {
   height: fit-content;
@@ -52,12 +51,18 @@ html {
   vertical-align: top;
   padding: 0%;
   border: hidden;
+  background-color: none;
 }
-
+.brightness{
+  filter:brightness(0.25);
+}
 .bin+.bin {
   margin-top: 30px
 }
-
+#imgbut{
+  margin-top:80%;
+  
+}
 #mcseeeNnums {
   margin: 0;
   padding: 0;
@@ -67,6 +72,12 @@ html {
   width: 88%;
   border-right: 6px solid;
   border-color: rgb(120, 90, 40);
+}
+
+#colecC, #colecS{
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 600px;
 }
 
 #mcseee {
@@ -86,7 +97,7 @@ html {
 }
 
 #materiais {
-  overflow: auto;
+  overflow-y:scroll;
   width: 30%;
   height: 100%;
   display: inline-block;
@@ -130,7 +141,7 @@ html {
 .gtex {
   color: greenyellow;
   animation-name: gtexto;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -177,10 +188,13 @@ html {
   width: 50%;
 }
 
-.info+.info {
-  margin-left: 10px;
+.info+.info , .bin + .info{
+  margin-left: 25px;
 }
 
+.info{
+  overflow: hidden;
+}
 #rights {
   display: inline-block;
   position: fixed;
@@ -208,6 +222,34 @@ html {
   align-items: flex-end;
   text-align: center;
 }
+#moldR{
+  padding-bottom: 0px;
+}
+#imgR{
+  z-index: 6;
+  position: absolute;
+  height: 95%;
+  width: 95%;
+  border-radius: 50%;
+  align-self: center;
+  top: 2.5%;
+  left:2.5%;
+  transform: rotateX(180deg);
+}
+.cut{
+  z-index: 10;
+  position: absolute;
+  background: url('/loot-league/static/imageAs/intbord.png');
+  background-repeat: no-repeat;
+  border: none;
+   box-shadow: none;
+   height: 100%;
+   width:100%;
+   bottom:2%;
+   left: 23%;
+   margin: 0px 0px 0px 0px;
+   padding: 0%;
+}
 
 .moldicon {
   align-self: center;
@@ -222,10 +264,13 @@ button {
 
 #acaoSh {
   position: absolute;
-  margin-bottom: 15%;
-  margin-right: 15%;
+  height: 12%;
+  width: 26%;
+  z-index: 12;
+  margin-bottom: 16%;
+  margin-left: 49%;
+  left: 0;
   bottom: 0;
-  right: 3;
 }
 
 
@@ -361,6 +406,7 @@ button {
 
 /*scrollbar*/
   ::-webkit-scrollbar {
+    visibility: visible;
     width: 7px;
     height: inherit;
   }
@@ -415,18 +461,6 @@ button {
   clip: rect(0px, 470px, 470px, 235px);
   border-radius: 100%;
   background-color: rgb(15, 27, 36);
-}
-.cut{
-  /*add circulo transparente pra mostrar img champ*/
-  z-index: 5;
-  position: absolute;
-   border-radius: 50%;
-   box-shadow: auto;
-   height: 95%;
-   width: 95%;
-   top: 2%;
-   left: 2%;
-   margin: 0px 0px 0px 0px;
 }
 /*cor*/
 .fill,

@@ -49,6 +49,14 @@ app.get('/loot-league/static/imageAs/collmod.png', (req, res) => {
     res.set('content-type', 'image/png');
     res.sendFile(path.join(__dirname, 'static/imageAs/collmod.png'));
 })
+app.get('/loot-league/static/imageAs/bauIndl.png', (req, res) => {
+    res.set('content-type', 'image/png');
+    res.sendFile(path.join(__dirname, 'static/imageAs/bauIndl.png'));
+})
+app.get('/loot-league/static/imageAs/intbord.png', (req, res) => {
+    res.set('content-type', 'image/png');
+    res.sendFile(path.join(__dirname, 'static/imageAs/intbord.png'));
+})
 //post request de info de ID campeao, recebendo string em buffer->b64->jpg e servindo pro front:
 app.post('/img', (req, res) => {
     const { id } = req.body;
