@@ -59,14 +59,6 @@
                         <h3>materiais</h3>
                         <hr>
                         <button id="baus1" onclick="bshow()"></button>
-                        <h3><label for="champs">champs</label></h3>
-                        <hr>
-                        <div id="champs">
-                        </div>
-                        <h3><label for="skins">skins</label></h3>
-                        <hr>
-                        <div id="skins">
-                        </div>
                     </div>
                 </div>
                 <!-- numeros + botao bau -->
@@ -109,6 +101,46 @@
         var numer=0;
         var modo = document.getElementById("drop-choice");
         //func searchbar
+        var searchInp = document.getElementById("sbme");
+        searchInp.oninput = function busc(){
+            var chilelem = document.getElementById("materiais").children.length - 2;
+            let ordo = [];
+            //get info dos botoes (nome pra sort) (ordo=> array de nomes)
+            for (var i = 1; i < chilelem; i++) {
+                var A = document.getElementById(`butt${i}`);
+                var str = A.getAttribute("name");
+                ordo[i] = str;
+            }
+            //filtro de undefined (elemento do bau passa :/ )
+            ordo = ordo.filter(function (element) {
+                return element !== undefined;
+            })
+            //sumir todos botoes!
+            for (var i = 0; i < ordo.length; i++) {
+                console.log(ordo[i]);
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                dispn(elem, num);
+            }
+            console.log(searchInp.value);
+            for(var i=0; i<ordo.length; i++){
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                var texto = ordo[i].split('-');
+                var sliceTex = texto[0].slice(0,searchInp.value.length).toUpperCase();
+                if(sliceTex===searchInp.value.toUpperCase()){
+                    dispy(elem, num);
+                }
+            }
+            if(searchInp.value===""){
+                for(var i=0; i<ordo.length; i++){
+                var elem = document.getElementsByName(ordo[i]);
+                var num = elem.length;
+                dispy(elem,num);
+            }
+            }
+            //searchInp.value
+        }
         //funcao json b64 to src img
         function bacao() {
             if (cam === 1) {
@@ -145,6 +177,7 @@
             document.getElementById("acaoSh").innerHTML = "ABRIR";
             document.getElementById("baus1").innerHTML = inventario[0] + "<span class='rtex'>(-1)</span>";
             document.getElementById("acaoSh").setAttribute("onClick", "baction();banum()");
+            document.getElementById("acaoSh").style.marginLeft = "60%";
             document.getElementById("showR").style.display = "block";
             document.getElementById("loading").style.display = "none";
             document.getElementById("moldR").style.display = "none";
@@ -158,8 +191,10 @@
             //document.getElementById("imgR").style.backgroundImage = 'url("' + img.src + '")';
             document.getElementById("imgR").src = img.src;
             document.getElementById("acaoSh").innerHTML = "APRIMORAR";
+            document.getElementById("acaoSh").style.marginLeft = "49%";
 
             document.getElementById("acaoSh").setAttribute("onClick", `champC(${bot.id}` + `,${img.id})`);
+
             modo.style.display = "none";
             document.getElementById("showR").style.display = "block";
             document.getElementById("imgR").style.display = "block";
@@ -281,7 +316,7 @@
                         //adiciona botao ao div materiais
 
                         butt.appendChild(imagem);
-                        elem = document.getElementById("champs");
+                        elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                     case 2:
@@ -316,7 +351,7 @@
                             .then((data) => crimg(data, imagem, butt, tipo));
                         butt.appendChild(imagem);
                         //adiciona botao ao div materiais
-                        elem = document.getElementById("skins");
+                        elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                 }
@@ -363,7 +398,7 @@
                             .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
-                        elem = document.getElementById("champs");
+                        elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                     case 2:
@@ -400,7 +435,7 @@
                             .then((data) => crimg(data, imagem, butt, tipo));
                         //adiciona botao ao div materiais
                         butt.appendChild(imagem);
-                        elem = document.getElementById("skins");
+                        elem = document.getElementById("materiais");
                         elem.appendChild(butt);
                         break;
                 }
@@ -456,6 +491,7 @@
                 h[i] = hold;
                 bot.remove();
             };
+
             //passar array de botoes organizados para materiais(entao vazio)
             for (var i = 0; i < chilelem; i++) {
                 var div = document.getElementById("materiais");
