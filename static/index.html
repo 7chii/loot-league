@@ -35,12 +35,14 @@
             </div>
             <!-- index -->
             <div id="indL">
-                <button class="bin" id="btncol" onclick="color()"><img src="/loot-league/static/imageAs/collmod.png" class="i"></button>
-                <button class="bin" onclick="orgall();color()"><img src="/loot-league/static/imageAs/allin.png" class="i"></button>
-                <button class="bin" onclick="orgchamp();color()"><img src="/loot-league/static/imageAs/campin.png" class="i"
-                        alt=""></button>
-                <button class="bin" onclick="orgskin();color()"><img src="/loot-league/static/imageAs/skinsin.png" class="i"
-                        alt=""></button>
+                <button class="bin" id="btncol" onclick=""><img src="/loot-league/static/imageAs/collmod.png"
+                        class="i"></button>
+                <button class="bin" onclick="orgall();"><img src="/loot-league/static/imageAs/allin.png"
+                        class="i"></button>
+                <button class="bin" onclick="orgchamp();"><img src="/loot-league/static/imageAs/campin.png"
+                        class="i" alt=""></button>
+                <button class="bin" onclick="orgskin();"><img src="/loot-league/static/imageAs/skinsin.png"
+                        class="i" alt=""></button>
             </div>
             <!-- materiais etc  e numeros + botao add bau embaixo -->
             <div id="mcseeeNnums">
@@ -64,7 +66,8 @@
                 <!-- numeros + botao bau -->
                 <div id="nums">
                     <!--botao bau+chave-->
-                    <button type="button" onclick="bacha()" class="bin"><img src="/loot-league/static/imageAs/bauIndl.png" id="imgbut" class="i"></button>
+                    <button type="button" onclick="bacha()" class="bin"><img
+                            src="/loot-league/static/imageAs/bauIndl.png" id="imgbut" class="i"></button>
                     <!-- paragrafos com essencias(azul e laranja) -->
                     <p id="EAZ" class="info">~</p>
                     <p id="ELA" class="info">~</p>
@@ -81,16 +84,16 @@
             <div id="showR">
                 <div id='loading'>
                     <div class='hold left'>
-                      <div class='fill'></div>
-                      <!--<div class='cut'></div>-->
+                        <div class='fill'></div>
+                        <!--<div class='cut'></div>-->
                     </div>
                     <img id="imgR">
                     <div class='hold right'>
-                      <!--<div class='cut'></div>-->
-                      <div class='fill'></div>
+                        <!--<div class='cut'></div>-->
+                        <div class='fill'></div>
                     </div>
-                  </div>
-                  <button type="button" onclick="bacao()" id="acaoSh">acao</button>
+                </div>
+                <button type="button" onclick="bacao()" id="acaoSh">acao</button>
             </div>
         </div>
     </div>
@@ -98,22 +101,28 @@
         var litem = 0;
         var cam = 0;
         var receb = 0;
-        var numer=0;
+        var numer = 0;
         var modo = document.getElementById("drop-choice");
         //func searchbar
         var searchInp = document.getElementById("sbme");
-        searchInp.oninput = function busc(){
-            var chilelem = document.getElementById("materiais").children.length - 2;
+        searchInp.oninput = function busc() {
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
+            })
+            ordo = ordo.filter(function (element) {
+                return element !== null;
             })
             //sumir todos botoes!
             for (var i = 0; i < ordo.length; i++) {
@@ -123,21 +132,21 @@
                 dispn(elem, num);
             }
             console.log(searchInp.value);
-            for(var i=0; i<ordo.length; i++){
+            for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
                 var num = elem.length;
                 var texto = ordo[i].split('-');
-                var sliceTex = texto[0].slice(0,searchInp.value.length).toUpperCase();
-                if(sliceTex===searchInp.value.toUpperCase()){
+                var sliceTex = texto[0].slice(0, searchInp.value.length).toUpperCase();
+                if (sliceTex === searchInp.value.toUpperCase()) {
                     dispy(elem, num);
                 }
             }
-            if(searchInp.value===""){
-                for(var i=0; i<ordo.length; i++){
-                var elem = document.getElementsByName(ordo[i]);
-                var num = elem.length;
-                dispy(elem,num);
-            }
+            if (searchInp.value === "") {
+                for (var i = 0; i < ordo.length; i++) {
+                    var elem = document.getElementsByName(ordo[i]);
+                    var num = elem.length;
+                    dispy(elem, num);
+                }
             }
             //searchInp.value
         }
@@ -202,12 +211,10 @@
             document.getElementById("loading").style.display = "block";
         }
         function champC(img, bot) {
-            console.log(img);
-            console.log(bot);
+            console.log(img.id);
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
             var custo = strina[1];
-            console.log(strina[1]);
             if (strina[3] === "S") {
                 inventario[2] = inventario[2] - custo;
             } else {
@@ -215,10 +222,12 @@
             }
             esnum();
             modadd(bot, img);
+            //pegar ids dos outros botoes e atualizar ids
             img.remove();
             document.getElementById("showR").style.display = "none";
             document.getElementById("moldR").style.display = "none";
         }
+
         function champV(img, bot) {
             var struse = img.getAttribute("name");
             var strina = struse.split('-');
@@ -226,10 +235,10 @@
             var valor = strina[2];
             if (strina[3] === "S") {
                 inventario[2] = inventario[2] + +valor;
-                document.getElementById("ELA").innerHTML = inventario[2]+"<span class='gtex'>(+" + valor + ")</span>";
+                document.getElementById("ELA").innerHTML = inventario[2] + "<span class='gtex'>(+" + valor + ")</span>";
             } else {
                 inventario[1] = inventario[1] + +valor;
-                document.getElementById("EAZ").innerHTML = inventario[1]+"<span class='gtex'>(+" + valor + ")</span>";
+                document.getElementById("EAZ").innerHTML = inventario[1] + "<span class='gtex'>(+" + valor + ")</span>";
             }
             //esnum();
             //modadd(bot, img);
@@ -446,58 +455,58 @@
         //funcs de organizacao
         //org alfabetica
         function abcorg() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
-            document.getElementById("orgbshow").innerHTML = document.getElementById("orgbabc").innerHTML;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            //ordem original pre-sort
-            var ordok = [];
-            for (var i = 0; i < ordo.length; i++) {
-                ordok[i] = ordo[i];
-            }
+            ordo = ordo.filter(function (element) {
+                return element !== null;
+            })
             ordo.sort();
             //lista de botoes
             let h = [];
-            chilelem = chilelem - 1;
             //for loop pegando botoes, arrumando ordem e appendando em array organizado
             for (var i = 0; i < chilelem; i++) {
                 var ele = ordo[i];
-                var bot = document.getElementsByName(`${ele}`)[0];
-                var fu = bot.getAttribute("onclick");
-                var hold = document.createElement("button");
+                if (ele !== undefined) {
+                    var bot = document.getElementsByName(`${ele}`)[0];
+                    var fu = bot.getAttribute("onclick");
+                    var hold = document.createElement("button");
 
-                hold.id = bot.id
-                hold.setAttribute("name", `${ele}`);
-                hold.setAttribute("onclick", `${fu}`);
+                    hold.id = bot.id
+                    hold.setAttribute("name", `${ele}`);
+                    hold.setAttribute("onclick", `${fu}`);
 
-                var imghold = document.createElement("img");
-                //pegar child img dentro do botao 
-                var imgarr = Array.from(bot.children);
-                var imgarrs = imgarr[0];
+                    var imghold = document.createElement("img");
+                    //pegar child img dentro do botao 
+                    var imgarr = Array.from(bot.children);
+                    var imgarrs = imgarr[0];
 
-                imghold.src = imgarrs.src;
-                imghold.id = imgarrs.id;
-                imghold.className = imgarrs.className;
-                hold.appendChild(imghold);
-                h[i] = hold;
-                bot.remove();
+                    imghold.src = imgarrs.src;
+                    imghold.id = imgarrs.id;
+                    imghold.className = imgarrs.className;
+                    hold.appendChild(imghold);
+                    h[i] = hold;
+                    bot.remove();
+                }
             };
 
             //passar array de botoes organizados para materiais(entao vazio)
-            for (var i = 0; i < chilelem; i++) {
+            for (var i = 0; i < h.length; i++) {
                 var div = document.getElementById("materiais");
                 //passar info para primeiro botao
                 var hold = h[i];
-                //console.log(hold.id);
                 butt = document.createElement("button");
                 butt = hold;
                 butt.style.border = "solid rgb(120, 90, 40)";
@@ -510,54 +519,54 @@
         }
         //org valor
         function cusorg() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
-            document.getElementById("orgbshow").innerHTML = document.getElementById("orgcus").innerHTML;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            var ordok = [];
-            for (var i = 0; i < ordo.length; i++) {
-                ordok[i] = ordo[i];
-            }
+            ordo = ordo.filter(function (element) {
+                return element !== null;
+            })
             ordo.sort(function (a, b) { return a.split('-')[2] - b.split('-')[2] });
-            console.log(ordo);
-            console.log(ordok);
             //lista de botoes
             let h = [];
-            chilelem = chilelem - 1;
             //for loop pegando botoes, arrumando ordem e appendando em array organizado
             for (var i = 0; i < chilelem; i++) {
                 var ele = ordo[i];
-                var bot = document.getElementsByName(`${ele}`)[0];
-                var fu = bot.getAttribute("onclick");
-                var hold = document.createElement("button");
+                if (ele !== undefined) {
+                    var bot = document.getElementsByName(`${ele}`)[0];
+                    var fu = bot.getAttribute("onclick");
+                    var hold = document.createElement("button");
 
-                hold.id = bot.id
-                hold.setAttribute("name", `${ele}`);
-                hold.setAttribute("onclick", `${fu}`);
+                    hold.id = bot.id
+                    hold.setAttribute("name", `${ele}`);
+                    hold.setAttribute("onclick", `${fu}`);
 
-                var imghold = document.createElement("img");
-                //pegar child img dentro do botao 
-                var imgarr = Array.from(bot.children);
-                var imgarrs = imgarr[0];
+                    var imghold = document.createElement("img");
+                    //pegar child img dentro do botao 
+                    var imgarr = Array.from(bot.children);
+                    var imgarrs = imgarr[0];
 
-                imghold.src = imgarrs.src;
-                imghold.id = imgarrs.id;
-                imghold.className = imgarrs.className;
-                hold.appendChild(imghold);
-                h[i] = hold;
-                bot.remove();
+                    imghold.src = imgarrs.src;
+                    imghold.id = imgarrs.id;
+                    imghold.className = imgarrs.className;
+                    hold.appendChild(imghold);
+                    h[i] = hold;
+                    bot.remove();
+                }
             };
             //passar array de botoes organizados para materiais(entao vazio)
-            for (var i = 0; i < chilelem; i++) {
+            for (var i = 0; i <  h.length; i++) {
                 var div = document.getElementById("materiais");
                 //passar info para primeiro botao
                 var hold = h[i];
@@ -574,33 +583,32 @@
         }
         //func org valor
         function valorg() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
-            document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
-            var ordok = [];
-            for (var i = 0; i < ordo.length; i++) {
-                ordok[i] = ordo[i];
-            }
+            ordo = ordo.filter(function (element) {
+                return element !== null;
+            })
             ordo.sort(function (a, b) { return a.split('-')[1] - b.split('-')[1] });
-            console.log(ordo);
-            console.log(ordok);
             //lista de botoes
             let h = [];
-            chilelem = chilelem - 1;
             //for loop pegando botoes, arrumando ordem e appendando em array organizado
             for (var i = 0; i < chilelem; i++) {
                 var ele = ordo[i];
-                var bot = document.getElementsByName(`${ele}`)[0];
+                if(ele !== undefined){
+                    var bot = document.getElementsByName(`${ele}`)[0];
                 var fu = bot.getAttribute("onclick");
                 var hold = document.createElement("button");
 
@@ -619,9 +627,10 @@
                 hold.appendChild(imghold);
                 h[i] = hold;
                 bot.remove();
+                }
             };
             //passar array de botoes organizados para materiais(entao vazio)
-            for (var i = 0; i < chilelem; i++) {
+            for (var i = 0; i < h.length; i++) {
                 var div = document.getElementById("materiais");
                 //passar info para primeiro botao
                 var hold = h[i];
@@ -638,49 +647,67 @@
         }
         //org apenas skin
         function orgskin() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
-            //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
+            ordo = ordo.filter(function (element) {
+                return element !== null;
+            })
+            console.log(ordo)
             for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
+                console.log(elem);
                 var num = elem.length;
-                dispy(elem, num);
-                if (ordo[i].split('-')[3] === "C") {
-                    dispn(elem, num);
+                dispn(elem, num);
+                if (ordo[i].split('-')[3] === "S") {
+                    dispy(elem, num);
                 }
             }
         }
         //org apenas champ
         function orgchamp() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             //document.getElementById("orgbshow").innerHTML = document.getElementById("orgval").innerHTML;
+            //var bot = document.getElementById("materiais").lastChild;
             let ordo = [];
+            //var string = bot.id.split('tt');
+              //  string[1] = Number(string[1])+1;
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
             })
+            ordo = ordo.filter(function (element) {
+                return element !== null;
+            })
+            console.log(ordo)
             for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
+                console.log(elem);
                 var num = elem.length;
-                dispy(elem, num);
-                if (ordo[i].split('-')[3] === "S") {
-                    dispn(elem, num);
+                dispn(elem, num);
+                if (ordo[i].split('-')[3] === "C") {
+                    dispy(elem, num);
                 }
             }
         }
@@ -696,17 +723,23 @@
         }
         //func org mostrar tudo
         function orgall() {
-            var chilelem = document.getElementById("materiais").children.length - 2;
+            var chilelem = document.getElementById("materiais").children.length;
+            var children = document.getElementById("materiais").children;
             let ordo = [];
             //get info dos botoes (nome pra sort) (ordo=> array de nomes)
             for (var i = 1; i < chilelem; i++) {
-                var A = document.getElementById(`butt${i}`);
-                var str = A.getAttribute("name");
-                ordo[i] = str;
+                var A = children[i]
+                if (A.name !== null) {
+                    var str = A.getAttribute("name");
+                    ordo[i] = str;
+                }
             }
             //filtro de undefined (elemento do bau passa :/ )
             ordo = ordo.filter(function (element) {
                 return element !== undefined;
+            })
+            ordo = ordo.filter(function (element) {
+                return element !== null;
             })
             for (var i = 0; i < ordo.length; i++) {
                 var elem = document.getElementsByName(ordo[i]);
@@ -747,7 +780,7 @@
             return Math.floor(Math.random() * numb);
         }
         function modadd(img, bot) {
-            numer = numer+1;
+            numer = numer + 1;
             var struse = bot.getAttribute("name");
             var strina = struse.split('-');
             //nome skin
@@ -759,17 +792,17 @@
             var imagem = document.createElement("img");
             imagem.src = img.src
             imagem.className = "colit";
-            imagem.id = "img"+numer;
+            imagem.id = "img" + numer;
 
             var str = document.createElement("label");
-            str.htmlFor = "img"+numer;
+            str.htmlFor = "img" + numer;
             str.innerHTML = strina[0];
 
             div.appendChild(imagem);
             div.appendChild(str);
-            if(strina[3]==="C"){
+            if (strina[3] === "C") {
                 elem = document.getElementById("colecC");
-            }else if(strina[3]==="S"){
+            } else if (strina[3] === "S") {
                 elem = document.getElementById("colecS");
             }
             elem.appendChild(div);
